@@ -6,7 +6,7 @@ import os
 import shutil
 
 import tcr_benchmark.utils.config as config
-from tcr_benchmark.preprocessing.downloader import AbstractDownloader
+from tcr_benchmark.pp.abstractDownloader import AbstractDownloader
 
 
 class FrancisDownloader(AbstractDownloader):

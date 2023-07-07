@@ -3,12 +3,12 @@ import os
 import requests
 
 import tcr_benchmark.utils.config as config
-from tcr_benchmark.preprocessing.downloader import AbstractDownloader
+from tcr_benchmark.pp.abstractDownloader import AbstractDownloader
 
 
 class MinervinaDownloader(AbstractDownloader):
     def __init__(self):
-        super(MinervinaDownloader, self).__init__('minervina')
+        super().__init__('minervina')
 
         self.url = 'https://static-content.springer.com/esm/art%3A10.1038%2Fs41590-022-01184-4/' \
                    'MediaObjects/41590_2022_1184_MOESM6_ESM.xlsx'

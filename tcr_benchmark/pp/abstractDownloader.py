@@ -3,9 +3,6 @@ import abc
 
 import tcr_benchmark.utils.config as config
 
-from tcr_benchmark.preprocessing.minervina import MinervinaDownloader
-from tcr_benchmark.preprocessing.francis import FrancisDownloader
-
 
 class AbstractDownloader(abc.ABC):
     def __init__(self, name):
@@ -16,7 +13,7 @@ class AbstractDownloader(abc.ABC):
         self.name = name
         self.rename_columns = {}
 
-        self.path_data = f'{os.path.dirname(__file__)}/data'
+        self.path_data = config.path_data
         self.path_tmp = f'{self.path_data}/tmp_{name}'
         self.path_out = f'{self.path_data}/{name}.csv'
         os.makedirs(self.path_data, exist_ok=True)
@@ -54,11 +51,11 @@ class AbstractDownloader(abc.ABC):
         :param df_data: pd.DataFrame, with missing CDR3b and wrong column names
         :return: pd.DataFrame, containing the filtered, correctly named dataset
         """
-        df_data = df_data.replace(columns=self.rename_columns)
+        df_data = df_data.rename(columns=self.rename_columns)
         df_data = df_data[~df_data[config.col_cdr3b].isna()]
         df_data = df_data.reset_index(drop=True)
         df_data = df_data[config.required_cols]
-        raise df_data
+        return df_data
 
     @abc.abstractmethod
     def clean_up(self):
@@ -66,12 +63,3 @@ class AbstractDownloader(abc.ABC):
         Removes tmp data.
         """
         raise NotImplementedError
-
-
-def download_all():
-    """
-    Download the datasets from Minervina, Francis, and ...
-    :return: processed datasets, und ../data/{name}.csv
-    """
-    for dataset in [MinervinaDownloader, FrancisDownloader]:
-        dataset.get_data()
