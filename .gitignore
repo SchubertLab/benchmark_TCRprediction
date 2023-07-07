@@ -1,1 +1,6 @@
 ./figures/*
+scrubs/*
+.idea/*
+data/*
+__pycache__
+
