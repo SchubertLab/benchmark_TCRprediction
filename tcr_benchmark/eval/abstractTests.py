@@ -21,15 +21,25 @@ class AbstractTest(abc.ABC):
 
         self.test_settings = {}
 
-    def run_tests(self):
+    def run_tests(self, predictor):
         """
 
         :return:
         """
+        prediction = self.run_prediction(predictor)
         results = {
-            name: test_func() for name, test_func in self.test_settings.items()
+            name: test_func(prediction) for name, test_func in self.test_settings.items()
         }
         self.save_results(results)
+
+    @abc.abstractmethod
+    def run_prediction(self, prediction_func):
+        """
+        To reduce computational load, predictions are conducted once in this function covering all test settings.
+        :param prediction_func: function, that receives a pd.DataFrame, and returns the dataframe with a binding score
+        :return: pd.DataFrame, containing TCR-epitope pairs, binding label, and prediction score
+        """
+        raise NotImplementedError
 
     def save_results(self, results):
         """
