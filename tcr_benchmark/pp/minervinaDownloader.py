@@ -23,7 +23,7 @@ class MinervinaDownloader(AbstractDownloader):
 
     def download_data(self):
         r = requests.get(self.url, allow_redirects=True)
-        open(f'{self.path_tmp}.xlsx ', 'wb').write(r.content)
+        open(f'{self.path_tmp}.xlsx', 'wb').write(r.content)
 
     def extract_data(self):
         df_data = pd.read_excel(f'{self.path_data}/tmp_minervina.xlsx', sheet_name='cd8_final')
@@ -72,6 +72,9 @@ class MinervinaDownloader(AbstractDownloader):
 
         df_data[config.col_mhc] = df_data['epitope'].map(epitope_2_mhc)
         df_data[config.col_epitope] = df_data['epitope'].map(abr_epitopes)
+        df_data = df_data[(~df_data["epitope"].isna()) & (df_data["epitope"] != "NaN")]
+        df_data = df_data[(~df_data["MHC"].isna()) & (df_data["MHC"] != "NaN")]
+        df_data = df_data[(~df_data["cdr3a"].isna()) & (df_data["cdr3a"] != "NaN")]
         return df_data
 
     def clean_up(self):

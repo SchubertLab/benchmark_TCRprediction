@@ -1,0 +1,16 @@
+imrex:
+    conda: tcr_predictors
+ergo-ii:
+    repository: epytope/external/ERGO-II
+pmtnet:
+    repository: ../../external/pMTnet
+    conda: epytope_tf20
+epitcr:
+    repository: ../../external/epiTCR
+    conda: epytope_python3.8
+atm-tcr:
+    repository: ../../external/ATM-TCR
+    conda: epytope_torch10
+    cuda: True
+titan:
+    conda: epytope_torch10

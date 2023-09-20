@@ -11,9 +11,9 @@ from tcr_benchmark.pp.abstractDownloader import AbstractDownloader
 
 class FrancisDownloader(AbstractDownloader):
     def __init__(self):
-        super(FrancisDownloader, self).__init__('francis')
+        super().__init__('francis')
 
-        self.url = 'TODO'
+        self.url = 'https://figshare.com/ndownloader/files/41532987?private_link=03accf2ab2a3f3d227d0'
         self.rename_columns = {
             'alpha1_vgene': config.col_va,
             'alpha1_jgene': config.col_ja,
@@ -23,11 +23,12 @@ class FrancisDownloader(AbstractDownloader):
         }
 
     def download_data(self):
-        raise NotImplementedError
+        r = requests.get(self.url, allow_redirects=True)
+        open(f'{self.path_tmp}.zip', 'wb').write(r.content)
 
     def extract_data(self):
-        with zipfile.ZipFile(f'{self.path_data}/sciimmunol.abk3070_data_files_s1_to_s9.zip', 'r') as zip_ref:
-            zip_ref.extractall(f'{self.path_data}/francis_tmp')
+        with zipfile.ZipFile(f'{self.path_tmp}.zip', 'r') as zip_ref:
+            zip_ref.extractall(self.path_tmp)
 
         df_data = pd.read_excel(f'{self.path_tmp}/sciimmunol.abk3070_data_file_s3.xlsx',
                                 sheet_name='Supp_Table_hits_VDJ')
@@ -38,5 +39,5 @@ class FrancisDownloader(AbstractDownloader):
         return df_data
 
     def clean_up(self):
-        shutil.rmtree(f'{self.path_data}/francis_tmp')
-        os.remove(f'{self.path_data}/sciimmunol.abk3070_data_files_s1_to_s9.zip')
+        shutil.rmtree(self.path_tmp)
+        os.remove(f'{self.path_tmp}.zip')

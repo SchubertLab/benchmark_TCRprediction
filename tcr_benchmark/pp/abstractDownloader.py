@@ -23,11 +23,12 @@ class AbstractDownloader(abc.ABC):
         Donloads, processes, and saves the dataset.
         :return: dataset under ../data/{name}.csv
         """
-        self.download_data()
-        df_data = self.extract_data()
-        df_data = self.standardize_data(df_data)
-        df_data.to_csv(self.path_out)
-        self.clean_up()
+        if not os.path.exists(self.path_out):
+            self.download_data()
+            df_data = self.extract_data()
+            df_data = self.standardize_data(df_data)
+            df_data.to_csv(self.path_out)
+            self.clean_up()
 
     @abc.abstractmethod
     def download_data(self):
@@ -55,6 +56,7 @@ class AbstractDownloader(abc.ABC):
         df_data = df_data[~df_data[config.col_cdr3b].isna()]
         df_data = df_data.reset_index(drop=True)
         df_data = df_data[config.required_cols]
+        df_data = df_data.drop_duplicates()
         return df_data
 
     @abc.abstractmethod
@@ -63,3 +65,5 @@ class AbstractDownloader(abc.ABC):
         Removes tmp data.
         """
         raise NotImplementedError
+
+# TODO filter epitope length 13 in minervina

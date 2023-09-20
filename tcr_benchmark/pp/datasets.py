@@ -4,13 +4,13 @@ from tqdm import tqdm
 
 import tcr_benchmark.utils.config as config
 
-from tcr_benchmark.pp.minervina import MinervinaDownloader
-from tcr_benchmark.pp.francis import FrancisDownloader
+from tcr_benchmark.pp.minervinaDownloader import MinervinaDownloader
+from tcr_benchmark.pp.francisDownloader import FrancisDownloader
 
 
 dataset_downloader = {
     'minervina': MinervinaDownloader,
-    #'francis': FrancisDownloader,
+    'francis': FrancisDownloader,
 }
 
 
@@ -38,10 +38,12 @@ def get_all_datasets():
     return datasets
 
 
-def download_all_datasets():
+def download_datasets(selection):
     """
     Download the datasets from Minervina, Francis, and ...
+    :param selection: list(str) or str
     :return: processed datasets, und ../data/{name}.csv
     """
-    for dataset in tqdm(dataset_downloader.values()):
-        dataset().get_data()
+    for name, dataset in tqdm(dataset_downloader.items()):
+        if selection == "all" or name in selection:
+            dataset().get_data()
