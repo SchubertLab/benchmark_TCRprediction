@@ -1,5 +1,4 @@
 import numpy as np
-import warnings
 from sklearn.metrics import roc_auc_score, average_precision_score, precision_recall_curve
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
 from scipy.stats import pearsonr, spearmanr

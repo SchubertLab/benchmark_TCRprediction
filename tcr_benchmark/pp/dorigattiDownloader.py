@@ -1,7 +1,6 @@
 import pandas as pd
 import requests
 import os
-import shutil
 
 import tcr_benchmark.utils.config as config
 from tcr_benchmark.pp.abstractDownloader import AbstractDownloader
@@ -25,7 +24,7 @@ class DorigattiDownloader(AbstractDownloader):
         open(f"{self.path_tmp}.xlsx", "wb").write(r.content)
 
     def extract_data(self):
-        df_data = pd.read_excel(f'{self.path_tmp}.xlsx', sheet_name='Normalized by PC', engine='openpyxl')
+        df_data = pd.read_excel(f"{self.path_tmp}.xlsx", sheet_name="Normalized by PC", engine="openpyxl")
         receptors = ["R21", "R23", "R24", "R25", "R26", "R28"]
         df_data = df_data[["Peptide"] + receptors]
         df_data = df_data.rename(columns={"Peptide": "Epitope"})
@@ -34,7 +33,7 @@ class DorigattiDownloader(AbstractDownloader):
         df_data["Label"] = df_data["Activation Score"].apply(lambda x: 1 if x > 66.09 else 0)
         df_data["MHC"] = "HLA-B*07:02"
 
-        df_seqs = pd.read_excel(f'{self.path_tmp}.xlsx', sheet_name='Sequences', engine='openpyxl', skiprows=1)
+        df_seqs = pd.read_excel(f"{self.path_tmp}.xlsx", sheet_name="Sequences", engine="openpyxl", skiprows=1)
         df_seqs = df_seqs[["TCR"] + list(self.rename_columns.keys())]
         df_seqs = df_seqs.rename(columns=self.rename_columns)
         df_seqs = df_seqs[df_seqs["TCR"].isin(receptors)]

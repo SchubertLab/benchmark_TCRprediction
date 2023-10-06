@@ -11,10 +11,10 @@ class MinervinaTests(AbstractTest):
 
         :param path_out:
         """
-        super().__init__('minervina', path_out)
+        super().__init__("minervina", path_out)
         self.test_settings = {
-            # 'MPS': self.run_multiple_peptide_selection_test,
-            'TTP': self.run_tcr_peptide_pairing_test,
+            # "MPS": self.run_multiple_peptide_selection_test,
+            "TTP": self.run_tcr_peptide_pairing_test,
         }
         self.test_data = None
 
@@ -33,8 +33,8 @@ class MinervinaTests(AbstractTest):
             df_tmp["MHC"] = mhc
             data_full.append(df_tmp)
         data_full = pd.concat(data_full)
-        data_full = pd.merge(data_full, self.df_base_data, how='left', indicator="Label")
-        data_full["Label"] = np.where(data_full.Label == 'both', 1, 0)
+        data_full = pd.merge(data_full, self.df_base_data, how="left", indicator="Label")
+        data_full["Label"] = np.where(data_full.Label == "both", 1, 0)
 
         prediction = predictor(data_full, **config_predictor)
         return prediction

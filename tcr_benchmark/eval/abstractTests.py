@@ -19,7 +19,7 @@ class AbstractTest(abc.ABC):
 
         self.df_base_data = get_dataset(self.ds_name)
 
-        self.path_out = f'{config.path_results}' if path_out is None else path_out
+        self.path_out = f"{config.path_results}" if path_out is None else path_out
         os.makedirs(self.path_out, exist_ok=True)
 
         self.test_settings = {}
@@ -30,7 +30,7 @@ class AbstractTest(abc.ABC):
         :return:
         """
         prediction = self.run_prediction(predictor, config_predictor)
-        prediction.to_csv(f'{self.path_out}/predictions_{name}_{self.ds_name}.csv')
+        prediction.to_csv(f"{self.path_out}/predictions_{name}_{self.ds_name}.csv")
         mask_nans = prediction["Score"].isna()
         if mask_nans.sum() > 0:
             warnings.warn(f"Filtering {np.sum(mask_nans)} elements for {name} due to NaN prediction.", stacklevel=-1)
@@ -44,9 +44,9 @@ class AbstractTest(abc.ABC):
                    for metric_name, metric_value in test_values.items()}
         columns = pd.MultiIndex.from_tuples(results.keys())
         results = pd.DataFrame(data=results.values(), index=columns,
-                               columns=[name if name is not None else 'predictor'])
+                               columns=[name if name is not None else "predictor"])
         results = results.transpose()
-        results.to_csv(f'{self.path_out}/results_{name}_{self.ds_name}.csv')
+        results.to_csv(f"{self.path_out}/results_{name}_{self.ds_name}.csv")
         return results
 
     @abc.abstractmethod
@@ -63,8 +63,8 @@ class AbstractTest(abc.ABC):
         """
         Stores the results to disk.
         :param results: dict {name, results as pd.DataFrame} containin the results of the individual tests
-        :return: writes results to '{path_results}/{dataset_name}_{test_name}.csv'
+        :return: writes results to "{path_results}/{dataset_name}_{test_name}.csv"
         """
         for test_name, result in results.items():
-            path_res = f'{self.path_out}/{self.ds_name}_{test_name}.csv'
+            path_res = f"{self.path_out}/{self.ds_name}_{test_name}.csv"
             result.to_csv(path_res)
