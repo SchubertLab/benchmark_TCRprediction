@@ -125,7 +125,7 @@ def calculate_correlation_metrics(labels, scores, groups=None):
         supports = {}
         for group in set(groups):
             mask = groups == group
-            supports[group] = sum(mask & (labels == 1))
+            supports[group] = sum(mask)
             labels_tmp = labels[mask]
             scores_tmp = scores[mask]
             metrics_tmp = {f"{name}_{group}": func(labels_tmp, scores_tmp)[0] for name, func in
