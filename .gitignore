@@ -2,5 +2,6 @@
 scrubs/*
 .idea/*
 data/*
+scripts/cluster*
 __pycache__
 epytope
