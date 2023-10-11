@@ -1,11 +1,11 @@
 import pandas as pd
 import argparse
-import yaml
 from tqdm import tqdm
 
 from tcr_benchmark.pp.datasets import download_datasets
 from tcr_benchmark.study.ePytopeWrapper import wrapp_predictor
 from tcr_benchmark.eval.allTests import NAME_2_TEST
+from tcr_benchmark.utils.config import read_config_yaml
 
 
 DATASETS = ["minervina", "francis", "dorigatti"]
@@ -65,8 +65,7 @@ def run_full_benchmark():
     print("- Load config")
     config = None
     if args.path_config_yaml is not None:
-        with open(args.path_config_yaml, "r") as yaml_file:
-            config = yaml.safe_load(yaml_file)
+        config = read_config_yaml(args.path_config_yaml)
 
     print("- Setup all datasets")
     datasets = select_datasets(args.dataset_selection)
