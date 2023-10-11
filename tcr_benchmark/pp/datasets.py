@@ -6,11 +6,13 @@ import tcr_benchmark.utils.config as config
 
 from tcr_benchmark.pp.minervinaDownloader import MinervinaDownloader
 from tcr_benchmark.pp.francisDownloader import FrancisDownloader
+from tcr_benchmark.pp.dorigattiDownloader import DorigattiDownloader
 
 
 dataset_downloader = {
-    'minervina': MinervinaDownloader,
-    'francis': FrancisDownloader,
+    "minervina": MinervinaDownloader,
+    "francis": FrancisDownloader,
+    "dorigatti": DorigattiDownloader,
 }
 
 
@@ -20,8 +22,8 @@ def get_dataset(name):
     :param name: str, name of the dataset
     :return: pd.DataFrame, containing the dataset
     """
-    assert name.lower() in dataset_downloader, f'Name is "{name}" but must be in {dataset_downloader.keys()}.'
-    path_dataset = f'{config.path_data}/{name}.csv'
+    assert name.lower() in dataset_downloader, f"Name is '{name}' but must be in {dataset_downloader.keys()}."
+    path_dataset = f"{config.path_data}/{name}.csv"
     if not os.path.exists(path_dataset):
         downloader = dataset_downloader[name.lower()]
         downloader().get_data()

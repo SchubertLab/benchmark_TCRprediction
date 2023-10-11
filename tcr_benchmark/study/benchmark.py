@@ -8,7 +8,7 @@ from tcr_benchmark.study.ePytopeWrapper import wrapp_predictor
 from tcr_benchmark.eval.allTests import NAME_2_TEST
 
 
-DATASETS = ['minervina', 'francis']
+DATASETS = ["minervina", "francis", "dorigatti"]
 
 
 def select_predictors(predictor_selection):

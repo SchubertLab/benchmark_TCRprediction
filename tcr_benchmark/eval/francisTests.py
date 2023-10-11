@@ -7,9 +7,9 @@ class FrancisTest(AbstractTest):
 
         :param path_out:
         """
-        super().__init__('minervina', path_out)
+        super().__init__("francis", path_out)
         self.test_settings = {
-            'TTP': self.run_tcr_peptide_pairing_test,
+            "TTP": self.run_tcr_peptide_pairing_test,
         }
 
     def run_prediction(self, predictor):

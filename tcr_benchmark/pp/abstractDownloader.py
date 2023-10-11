@@ -14,13 +14,13 @@ class AbstractDownloader(abc.ABC):
         self.rename_columns = {}
 
         self.path_data = config.path_data
-        self.path_tmp = f'{self.path_data}/tmp_{name}'
-        self.path_out = f'{self.path_data}/{name}.csv'
+        self.path_tmp = f"{self.path_data}/tmp_{name}"
+        self.path_out = f"{self.path_data}/{name}.csv"
         os.makedirs(self.path_data, exist_ok=True)
 
     def get_data(self):
         """
-        Donloads, processes, and saves the dataset.
+        Downloads, processes, and saves the dataset.
         :return: dataset under ../data/{name}.csv
         """
         if not os.path.exists(self.path_out):
