@@ -5,6 +5,7 @@ import tcr_benchmark.utils.config as config
 def wrapp_predictor(name):
     from epytope.IO.IRDatasetAdapter import IRDataset
     from epytope.Core.TCREpitope import TCREpitope
+    from epytope.Core.Allele import Allele
     from epytope.TCRSpecificityPrediction import TCRSpecificityPredictorFactory
 
     def prediction_function(df_data, **kwargs):
@@ -26,7 +27,7 @@ def wrapp_predictor(name):
         df_epytope = df_epytope.rename(columns=rename_dict)
         tcrs = IRDataset()
         tcrs.from_dataframe(df_epytope)
-        epitopes = [TCREpitope(row["Epitope"], row["MHC"]) for _, row in df_data.iterrows()]
+        epitopes = [TCREpitope(row["Epitope"], Allele(row["MHC"])) for _, row in df_data.iterrows()]
         predictor = TCRSpecificityPredictorFactory(name)
         prediction = predictor.predict(tcrs, epitopes, pairwise=False, **kwargs)
         prediction = prediction.droplevel(0, axis=1)
