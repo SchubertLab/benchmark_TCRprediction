@@ -38,3 +38,5 @@ panpep:
         conda: epytope_torch10
 stapler: 
         conda: epytope_stapler
+tcellmatch:
+        conda: epytope_tf20

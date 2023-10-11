@@ -26,7 +26,6 @@ class DorigattiTests(AbstractTest):
         return prediction
 
     def run_classification_test(self, prediction):
-        print(prediction.columns)
         scores = metrics.calculate_score_metrics(prediction["Label"], prediction["Score"], prediction["TCR"])
         scores_class = metrics.calculate_classification_metrics(prediction["Label"], prediction["Score"],
                                                                 prediction["TCR"])
