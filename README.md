@@ -2,15 +2,48 @@
 This repository contains the code to recreate the study "todo" by Drost et al.
 
 ## Install
+Stand-alone Benchmark-Suite:
 ```
 pip install tcr-benchmark
 ```
 
+Benchmark-Suite with ePytope:
+
+Note: you will need to install the individual predictors, separately. You may consult the apptainer recipe in `./container/benchmark.def`
+```
+pip install tcr-benchmark[epytope]
+```
+
+Reproducibility:
+To reproduce the environment of the paper. To reproduce the specific environment of the predictors, we advise to use the apptainer recipe in `./container/benchmark.def`
+```
+pip install tcr-benchmark[epytope]
+```
+
 ## Reproduce Benchmark
 To reproduce the benchmark you can
+```
+git clone https://github.com/SchubertLab/benchmark_TCRprediction.git
+TODO: description how to build the apptainer
+```
 
 ## Test own Method
-To test your own method, ...
+To test your own method, you can use the programmatic interface:
+```
+from tcr_benchmark.pp.datasets import download_datasets
+from tcr_benchmark.study.benchmark import evaluate_predictor
+
+download_datasets("all")
+results = evaluate_predictor(prediction_func, predictor_name, datasets, config)
+```
+--- todo: interface prediction function
+
+## Components
+```
+|
+|
+|
+```
 
 ## Cite
 When you reference the benchmark or use the provided utilities to evaluate your method please cite:
