@@ -13,7 +13,7 @@ DATASETS = ["minervina", "francis", "dorigatti"]
 
 def select_predictors(predictor_selection, config):
     if predictor_selection == "all":
-        return config.keys().tolist()
+        return list(config.keys())
     else:
         return predictor_selection.split(",")
 

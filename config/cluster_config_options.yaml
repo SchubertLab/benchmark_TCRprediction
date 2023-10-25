@@ -22,12 +22,11 @@ ergo-i:
         repository: ${PATH_EPYTOPE}/external/ERGO
         conda: epytope_torch11
         options: 
-                model_type:
-                        AE: ae
-                        LSTM: lstm
-                dataset:
-                        VDJDB: vdjdb
-                        MCPAS: mcpas
+                model:
+                        AE_VDJDB: ae_vdjdb1
+                        LSTM_VDJDB: lstm_vdjdb1
+                        AE_MCPAS: ae_mcpas1
+                        LSTM_MCPAS: lstm_mcpas1
 
 ergo-ii:
         repository: ${PATH_EPYTOPE}/external/ERGO-II
