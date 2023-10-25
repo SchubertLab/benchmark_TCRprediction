@@ -48,8 +48,8 @@ teinet:
         conda: epytope_torch11
         options:
                 model:
-                        LARGE_DS: ${PATH_EPYTOPE}/external/TEINet/models/large_dset.pth
-                        SMALL_DS: ${PATH_EPYTOPE}/external/TEINet/models/teinet_data.pth
+                        LARGE_DS: large_dset
+                        SMALL_DS: teinet_data
 
 epitcr:
         repository: ${PATH_EPYTOPE}/external/epiTCR
