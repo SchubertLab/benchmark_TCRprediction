@@ -22,6 +22,6 @@ setup(
         "epytope": [
             "epytope @ git+https://github.com/SchubertLab/epytope"
             ],
-        "reproducability": requirements
+        "reproducability": requirements,
     }
 )
