@@ -3,6 +3,8 @@ from setuptools import setup, find_packages
 with open("./requirements1.txt") as f:
     requirements = f.read().splitlines()
 
+print(requirements)
+
 setup(
     name="tcr_benchmark",
     version="1.0.0",
