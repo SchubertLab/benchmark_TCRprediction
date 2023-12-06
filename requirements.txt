@@ -3,7 +3,6 @@ _openmp_mutex==5.1
 absl-py==1.4.0
 aiohttp==3.8.5
 aiosignal==1.3.1
-anarci==2021.02.04
 asttokens==2.0.5
 astunparse==1.6.3
 async-timeout==4.0.2
