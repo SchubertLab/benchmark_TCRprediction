@@ -1,5 +1,8 @@
 from setuptools import setup, find_packages
 
+with open("requirements.txt") as f:
+    requirements = f.read().splitlines()
+
 setup(
     name="tcr_benchmark",
     version="1.0.0",
@@ -17,8 +20,6 @@ setup(
         "epytope": [
             "epytope @ git+https://github.com/SchubertLab/epytope"
             ],
-       # "reproducability": [
-       #
-       # ] # TODO: add exact versions of the used tools
+        "reproducability": requirements
     }
 )
