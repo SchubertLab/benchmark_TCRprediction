@@ -58,7 +58,6 @@ epitcr:
                 model:
                         WITH_MHC: rdforestWithMHCModel
                         WO_MHC: rdforestWithoutMHCModel
-                        WO_MHC_NO_OVERLAP: rdforestWithoutMHCNonOverlapingModel
 
 dlptcr:
         repository: ${PATH_EPYTOPE}/../external/DLpTCR
@@ -79,7 +78,7 @@ attntap:
 
 tulip-tcr:
         repository: ${PATH_EPYTOPE}/../external/TULIP-TCR
-        conda: epytope_tulip
+        conda: epytope
         options:
                 model:
                         MULTI_TCR: pretrained/multiTCR_s_mhcX_2_below20out
