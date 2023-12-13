@@ -1,7 +1,8 @@
 from setuptools import setup, find_packages
+from pip.req import parse_requirements
 
-with open("./requirements1.txt") as f:
-    requirements = f.read().splitlines()
+install_reqs = parse_requirements("requirements.txt")
+reqs = [str(ir.req) for ir in install_reqs]
 
 print(requirements)
 
@@ -22,6 +23,6 @@ setup(
         "epytope": [
             "epytope @ git+https://github.com/SchubertLab/epytope"
             ],
-        "reproducability": requirements,
+        "reproducability": reqs,
     }
 )
