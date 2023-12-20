@@ -58,3 +58,8 @@ idna==3.4
 imbalanced-learn==0.11.0
 importlib-metadata==6.8.0
 importlib_resources==5.2.0
+intel-openmp==2023.1.0
+ipykernel==6.19.2
+ipython==8.8.0
+jedi==0.18.1
+jinja2==3.1.2
