@@ -34,7 +34,6 @@ fsspec==2023.6.0
 gast==0.3.3
 gdown==4.7.1
 gensim==4.3.0
-giflib==5.2.1
 glib==2.69.1
 google-auth==1.35.0
 google-auth-oauthlib==0.4.6
