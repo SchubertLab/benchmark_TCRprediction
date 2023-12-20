@@ -44,3 +44,17 @@ gdown==4.7.1
 gensim==4.3.0
 giflib==5.2.1
 glib==2.69.1
+google-auth==1.35.0
+google-auth-oauthlib==0.4.6
+google-pasta==0.2.0
+grpcio==1.56.2
+gst-plugins-base==1.14.1
+gstreamer==1.14.1
+h5py==2.10.0
+hmmer==3.3.2
+huggingface-hub==0.16.4
+icu==58.2
+idna==3.4
+imbalanced-learn==0.11.0
+importlib-metadata==6.8.0
+importlib_resources==5.2.0
