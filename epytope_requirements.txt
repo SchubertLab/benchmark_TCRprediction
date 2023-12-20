@@ -28,7 +28,6 @@ entrypoints==0.4
 et-xmlfile==1.1.0
 executing==0.8.3
 filelock==3.12.2
-fontconfig==2.14.1
 fonttools==4.25.0
 freetype==2.12.1
 frozenlist==1.4.0
