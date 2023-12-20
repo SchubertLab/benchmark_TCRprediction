@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-with open('requirements1.txt') as f:
+with open('epytope_requirements.txt') as f:
     requirements = f.read().splitlines()
 
 # Filter out comments and empty lines
