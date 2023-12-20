@@ -38,7 +38,6 @@ google-auth==1.35.0
 google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
 grpcio==1.56.2
-gst-plugins-base==1.14.1
 gstreamer==1.14.1
 h5py==2.10.0
 hmmer==3.3.2
