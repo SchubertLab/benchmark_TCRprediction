@@ -29,7 +29,6 @@ et-xmlfile==1.1.0
 executing==0.8.3
 filelock==3.12.2
 fonttools==4.25.0
-freetype==2.12.1
 frozenlist==1.4.0
 fsspec==2023.6.0
 gast==0.3.3
