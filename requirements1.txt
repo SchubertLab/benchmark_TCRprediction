@@ -63,6 +63,5 @@ ipykernel==6.19.2
 ipython==8.8.0
 jedi==0.18.1
 jinja2==3.1.2
-joblib==1.3.0
-jpeg==9e
+jpeg==9
 jupyter_client==7.4.8
