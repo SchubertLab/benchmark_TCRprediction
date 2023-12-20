@@ -1,6 +1,4 @@
 from setuptools import setup, find_packages
-import pkg_resources
-import pathlib
 
 with open('requirements.txt') as f:
     reqs = f.read().splitlines()
