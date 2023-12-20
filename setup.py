@@ -1,7 +1,9 @@
 from setuptools import setup, find_packages
 
 with open('requirements.txt') as f:
-    reqs = f.read().splitlines()
+    requirements = f.read().splitlines()
+
+reqs = [req.strip() for req in requirements]
 
 setup(
     name="tcr_benchmark",
