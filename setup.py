@@ -1,17 +1,9 @@
 from setuptools import setup, find_packages
 import pkg_resources
 import pathlib
-try: # for pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError: # for pip <= 9.0.3
-    from pip.req import parse_requirements
 
-with pathlib.Path('requirements.txt').open() as requirements_txt:
-    reqs = [
-        str(requirement)
-        for requirement
-        in pkg_resources.parse_requirements(requirements_txt)
-    ]
+with open('requirements.txt') as f:
+    reqs = f.read().splitlines()
 
 setup(
     name="tcr_benchmark",
