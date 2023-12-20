@@ -6,8 +6,6 @@ with open('epytope_requirements.txt') as f:
 # Filter out comments and empty lines
 requirements = [req.strip() for req in requirements if req.strip() and not req.strip().startswith('#')]
 
-# Ensure each requirement is a valid specifier
-requirements = [req for req in requirements if '==' in req or '>=' in req or '<=' in req or '>' in req or '<' in req]
 
 setup(
     name="tcr_benchmark",
