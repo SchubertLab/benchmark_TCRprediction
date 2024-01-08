@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-with open('epytope_requirements_1.txt') as f:
+with open('epytope_requirements.txt') as f:
     epytope_requirements = f.read().splitlines()
 
 setup(
