@@ -76,13 +76,7 @@ attntap:
                         MCPAS: cv_model_0_mcpas_0
                         VDJDB: cv_model_0_vdjdb_0
 
-tulip-tcr:
-        repository: ${PATH_EPYTOPE}/../external/TULIP-TCR
-        conda: epytope
-        options:
-                model:
-                        MULTI_TCR: pretrained/multiTCR_s_mhcX_2_below20out
-                        FINETUNDE: hla0201_finetuned/multiTCR_s_mhcXfintune2
+
 nettcr:
         repository: ${PATH_EPYTOPE}/external/NetTCR-2.2
         conda: epytope_torch21
