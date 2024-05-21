@@ -6,13 +6,13 @@ import tcr_benchmark.utils.config as config
 
 from tcr_benchmark.pp.minervinaDownloader import MinervinaDownloader
 from tcr_benchmark.pp.francisDownloader import FrancisDownloader
-from tcr_benchmark.pp.dorigattiDownloader import DorigattiDownloader
+from tcr_benchmark.pp.mutationDownloader import MutationDownloader
 
 
 dataset_downloader = {
-    "minervina": MinervinaDownloader,
-    "francis": FrancisDownloader,
-    "dorigatti": DorigattiDownloader,
+    # "minervina": MinervinaDownloader,
+    # "francis": FrancisDownloader,
+    "mutation": MutationDownloader,
 }
 
 
@@ -49,3 +49,7 @@ def download_datasets(selection):
     for name, dataset in tqdm(dataset_downloader.items()):
         if selection == "all" or name in selection:
             dataset().get_data()
+
+
+if __name__ == "__main__":
+    get_all_datasets()
