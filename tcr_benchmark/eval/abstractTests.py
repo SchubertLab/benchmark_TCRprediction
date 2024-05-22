@@ -36,16 +36,44 @@ class AbstractTest(abc.ABC):
             warnings.warn(f"Filtering {np.sum(mask_nans)} elements for {name} due to NaN prediction.", stacklevel=-1)
             prediction = prediction[~mask_nans]
 
-        results = {
-            name: test_func(prediction) for name, test_func in self.test_settings.items()
-        }
-        results = {(self.ds_name, test_name, metric_name): metric_value
-                   for test_name, test_values in results.items()
-                   for metric_name, metric_value in test_values.items()}
-        columns = pd.MultiIndex.from_tuples(results.keys())
-        results = pd.DataFrame(data=results.values(), index=columns,
-                               columns=[name if name is not None else "predictor"])
-        results = results.transpose()
+        results = []
+        for metric_type, test_func in self.test_settings.items():
+            df_tmp = test_func(prediction)
+            df_tmp["Metric_Type"] = metric_type
+            results.append(df_tmp)
+        results = pd.concat(results)
+
+        groups = []
+        supports = []
+        metrics = []
+        values = []
+        datasets = []
+        types = []
+        for i, row in results[["Metric", "Metric_Type"]].drop_duplicates().iterrows():
+            m = row["Metric"]
+            c = row["Metric_Type"]
+            df_tmp = results[(results["Metric"] == m) & (results["Group"] != "full_data")]
+            average = df_tmp["Value"].mean()
+            weighted = (df_tmp["Value"] * df_tmp["Support"] / df_tmp["Support"].sum()).sum()
+            groups += ["Average", "WeightedAverage"]
+            supports += [len(df_tmp)] * 2
+            metrics += [m] * 2
+            values += [average, weighted]
+            datasets += ["All"] * 2
+            types += [c] * 2
+        results_avg = pd.DataFrame({
+            "Group": groups,
+            "Support": supports,
+            "Metric": metrics,
+            "Value": values,
+            "Dataset": datasets,
+            "Metric_Type": types,
+        })
+        results = pd.concat([results, results_avg])
+
+        results = results.reset_index(drop=True)
+        results["Method"] = name
+        results = results[["Method", "Dataset", "Group", "Support", "Metric_Type", "Metric", "Value"]]
         results.to_csv(f"{self.path_out}/results_{name}_{self.ds_name}.csv")
         return results
 

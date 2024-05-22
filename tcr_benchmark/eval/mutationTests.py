@@ -1,3 +1,5 @@
+import pandas as pd
+
 from tcr_benchmark.eval.abstractTests import AbstractTest
 import tcr_benchmark.eval.metrics as metrics
 
@@ -29,24 +31,26 @@ class MutationTest(AbstractTest):
         prediction_tumor = prediction[prediction["TCR"].str.startswith("R")]
         prediction_cmv = prediction[prediction["TCR"].str.startswith("CMV")]
 
-        scores = {}
-        for n, p in [("tumor", prediction_tumor), ("cmv", prediction_cmv)]:
+        scores = []
+        for n, p in [("Tumor", prediction_tumor), ("Cmv", prediction_cmv)]:
             scores_score = metrics.calculate_score_metrics(p["Label"], p["Score"], p["TCR"])
-            scores_score = {f"{n}_{k}": v for k, v in scores_score.items()}
-            scores.update(scores_score)
+            scores_score["Dataset"] = n
+            scores.append(scores_score)
 
             scores_class = metrics.calculate_classification_metrics(p["Label"], p["Score"], p["TCR"])
-            scores_class = {f"{n}_{k}": v for k, v in scores_class.items()}
-            scores.update(scores_class)
+            scores_class["Dataset"] = n
+            scores.append(scores_class)
+        scores = pd.concat(scores)
         return scores
 
     def run_regression_test(self, prediction):
         prediction_tumor = prediction[prediction["TCR"].str.startswith("R")]
         prediction_cmv = prediction[prediction["TCR"].str.startswith("CMV")]
 
-        scores = {}
-        for n, p in [("tumor", prediction_tumor), ("cmv", prediction_cmv)]:
+        scores = []
+        for n, p in [("Tumor", prediction_tumor), ("Cmv", prediction_cmv)]:
             scores_corr = metrics.calculate_correlation_metrics(p["Activation Score"], p["Score"], p["TCR"])
-            scores_corr = {f"{n}_{k}": v for k, v in scores_corr.items()}
-            scores.update(scores_corr)
+            scores_corr["Dataset"] = n
+            scores.append(scores_corr)
+        scores = pd.concat(scores)
         return scores

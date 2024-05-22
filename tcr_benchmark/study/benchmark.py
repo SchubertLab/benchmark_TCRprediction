@@ -8,7 +8,7 @@ from tcr_benchmark.eval.allTests import NAME_2_TEST
 from tcr_benchmark.utils.config import read_config_yaml
 
 
-DATASETS = ["minervina", "francis", "dorigatti"]
+DATASETS = ["mutation"]
 
 
 def select_predictors(predictor_selection):
@@ -81,3 +81,4 @@ if __name__ == "__main__":
 # python -m tcr_benchmark.study.benchmark --dataset_selection minervina,minervina --predictor_selection ergo-ii,imrex
 # python -m tcr_benchmark.study.benchmark --dataset_selection minervina --predictor_selection imrex --path_config_yaml config/sample_config.yaml
 #  python -m tcr_benchmark.study.benchmark --dataset_selection dorigatti --predictor_selection ergo-ii --path_config_yaml ./config/cluster_config.yaml --path_out results/base_experiment_dorigatti.csv
+#  python -m tcr_benchmark.study.benchmark --dataset_selection mutation --path_config_yaml ./config/config_docker.yaml

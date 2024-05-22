@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score, precision_recall_curve
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
 from scipy.stats import pearsonr, spearmanr
@@ -30,25 +31,29 @@ def calculate_score_metrics(labels, scores, groups=None):
     :param groups: iterable, indicating groups of predictions belonging together
     :return: dict(name_metric: score) resulting metrics
     """
-    metrics = {name: func(labels, scores) for name, func in SCORE_METRICS.items()}
+    n_metrics = len(SCORE_METRICS)
+    metric_names = list(SCORE_METRICS.keys())
+    metric_values = [func(labels, scores) for func in SCORE_METRICS.values()]
+    group_names = ["full_data"] * n_metrics
+    support_values = [len(labels)] * n_metrics
+
     if groups is not None:
-        supports = {}
         for group in set(groups):
             mask = groups == group
-            supports[group] = sum(mask & (labels == 1))
             labels_tmp = labels[mask]
             scores_tmp = scores[mask]
-            metrics_tmp = {f"{name}_{group}": func(labels_tmp, scores_tmp) for name, func in SCORE_METRICS.items()}
-            metrics.update(metrics_tmp)
-        metrics_avg = {f"{name}_groups_avg": sum([metrics[f"{name}_{group}"]
-                                                  for group in supports.keys()]) / len(supports)
-                       for name in SCORE_METRICS.keys()}
-        metrics_weighted = {f"{name}_groups_weighted": sum([metrics[f"{name}_{group}"] * supports[group]
-                                                            / sum(supports.values())
-                                                            for group in supports.keys()])
-                            for name in SCORE_METRICS.keys()}
-        metrics.update(metrics_avg)
-        metrics.update(metrics_weighted)
+
+            metric_names += list(SCORE_METRICS.keys())
+            metric_values += [func(labels_tmp, scores_tmp) for func in SCORE_METRICS.values()]
+            group_names += [group] * n_metrics
+            support_values += [len(labels_tmp)] * n_metrics
+
+    metrics = pd.DataFrame(data={
+        "Group": group_names,
+        "Support": support_values,
+        "Metric": metric_names,
+        "Value": metric_values
+    })
     return metrics
 
 
@@ -66,29 +71,29 @@ def calculate_classification_metrics(labels, scores, groups=None):
     threshold = thresholds[np.nanargmax(f1_scores)]
     y_pred = scores >= threshold
 
-    metrics = {}
-    for name, func in CLASSIFICATION_METRICS.items():
-        metrics[name] = func(labels, y_pred)
+    n_metrics = len(CLASSIFICATION_METRICS)
+    metric_names = list(CLASSIFICATION_METRICS.keys())
+    metric_values = [func(labels, y_pred) for func in CLASSIFICATION_METRICS.values()]
+    group_names = ["full_data"] * n_metrics
+    support_values = [len(labels)] * n_metrics
 
     if groups is not None:
-        supports = {}
         for group in set(groups):
             mask = groups == group
-            supports[group] = sum(mask & (labels == 1))
             labels_tmp = labels[mask]
             y_pred_tmp = y_pred[mask]
-            metrics_tmp = {f"{name}_{group}": func(labels_tmp, y_pred_tmp)
-                           for name, func in CLASSIFICATION_METRICS.items()}
-            metrics.update(metrics_tmp)
-        metrics_avg = {f"{name}_groups_avg": sum([metrics[f"{name}_{group}"]
-                                                  for group in supports.keys()]) / len(supports)
-                       for name in CLASSIFICATION_METRICS.keys()}
-        metrics_weighted = {f"{name}_groups_weighted": sum([metrics[f"{name}_{group}"] * supports[group]
-                                                            / sum(supports.values())
-                                                            for group in supports.keys()])
-                            for name in CLASSIFICATION_METRICS.keys()}
-        metrics.update(metrics_avg)
-        metrics.update(metrics_weighted)
+
+            metric_names += list(CLASSIFICATION_METRICS.keys())
+            metric_values += [func(labels_tmp, y_pred_tmp) for func in CLASSIFICATION_METRICS.values()]
+            group_names += [group] * n_metrics
+            support_values += [len(labels_tmp)] * n_metrics
+
+    metrics = pd.DataFrame(data={
+        "Group": group_names,
+        "Support": support_values,
+        "Metric": metric_names,
+        "Value": metric_values
+    })
     return metrics
 
 
@@ -120,7 +125,12 @@ def calculate_correlation_metrics(labels, scores, groups=None):
     :param groups: iterable, indicating groups of predictions belonging together
     :return: dict(name_metric: score) resulting metrics
     """
-    metrics = {name: func(labels, scores)[0] for name, func in CORRELATION_METRICS.items()}
+    n_metrics = len(CORRELATION_METRICS)
+    metric_names = list(CORRELATION_METRICS.keys())
+    metric_values = [func(labels, scores)[0] for func in CORRELATION_METRICS.values()]
+    group_names = ["full_data"] * n_metrics
+    support_values = [len(labels)] * n_metrics
+
     if groups is not None:
         supports = {}
         for group in set(groups):
@@ -128,16 +138,16 @@ def calculate_correlation_metrics(labels, scores, groups=None):
             supports[group] = sum(mask)
             labels_tmp = labels[mask]
             scores_tmp = scores[mask]
-            metrics_tmp = {f"{name}_{group}": func(labels_tmp, scores_tmp)[0] for name, func in
-                           CORRELATION_METRICS.items()}
-            metrics.update(metrics_tmp)
-        metrics_avg = {f"{name}_groups_avg": sum([metrics[f"{name}_{group}"]
-                                                  for group in supports.keys()]) / len(supports)
-                       for name in CORRELATION_METRICS.keys()}
-        metrics_weighted = {f"{name}_groups_weighted": sum([metrics[f"{name}_{group}"] * supports[group]
-                                                            / sum(supports.values())
-                                                            for group in supports.keys()])
-                            for name in CORRELATION_METRICS.keys()}
-        metrics.update(metrics_avg)
-        metrics.update(metrics_weighted)
+
+            metric_names += list(CORRELATION_METRICS.keys())
+            metric_values += [func(labels_tmp, scores_tmp)[0] for func in CORRELATION_METRICS.values()]
+            group_names += [group] * n_metrics
+            support_values += [len(labels_tmp)] * n_metrics
+
+    metrics = pd.DataFrame(data={
+        "Group": group_names,
+        "Support": support_values,
+        "Metric": metric_names,
+        "Value": metric_values
+    })
     return metrics
