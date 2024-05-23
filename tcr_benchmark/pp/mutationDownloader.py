@@ -67,6 +67,7 @@ class MutationDownloader(AbstractDownloader):
             df_seqs[col] = df_seqs[col].str.strip()
             df_seqs[col] = df_seqs[col].str.split("(").str[0]
             df_seqs[col] = df_seqs[col].str.split(" ").str[0]
+            df_seqs[col] = df_seqs[col].str.replace("*00", "*01", regex=False)
 
         mapping_id_peptides = pd.read_excel(f"{self.path_tmp}_1.xlsx", sheet_name="peptides", engine="openpyxl")
         mapping_id_peptides = dict(zip(mapping_id_peptides["ID"], mapping_id_peptides["Peptide"]))
