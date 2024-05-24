@@ -8,7 +8,7 @@ from tcr_benchmark.eval.allTests import NAME_2_TEST
 from tcr_benchmark.utils.config import read_config_yaml
 
 
-DATASETS = ["mutation"]
+DATASETS = ["mutation", "viral"]
 
 
 def select_predictors(predictor_selection):

@@ -1,10 +1,12 @@
 from tcr_benchmark.eval.minervinaTests import MinervinaTests
 from tcr_benchmark.eval.francisTests import FrancisTest
 from tcr_benchmark.eval.mutationTests import MutationTest
+from tcr_benchmark.eval.viralTests import ViralTest
 
 
 NAME_2_TEST = {
     # "minervina": MinervinaTests,
     # "francis": FrancisTest,
     "mutation": MutationTest,
+    "viral": ViralTest,
 }

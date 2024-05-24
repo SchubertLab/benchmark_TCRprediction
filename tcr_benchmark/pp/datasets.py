@@ -7,12 +7,14 @@ import tcr_benchmark.utils.config as config
 from tcr_benchmark.pp.minervinaDownloader import MinervinaDownloader
 from tcr_benchmark.pp.francisDownloader import FrancisDownloader
 from tcr_benchmark.pp.mutationDownloader import MutationDownloader
+from tcr_benchmark.pp.viralDownloader import ViralDownloader
 
 
 dataset_downloader = {
     # "minervina": MinervinaDownloader,
     # "francis": FrancisDownloader,
     "mutation": MutationDownloader,
+    "viral": ViralDownloader,
 }
 
 

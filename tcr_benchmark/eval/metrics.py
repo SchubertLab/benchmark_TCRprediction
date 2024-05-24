@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score, precision_recall_curve
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
-from scipy.stats import pearsonr, spearmanr
+from scipy.stats import pearsonr, spearmanr, rankdata
 
 
 SCORE_METRICS = {
@@ -21,6 +21,10 @@ CORRELATION_METRICS = {
     "Pearson": pearsonr,
     "Spearman": spearmanr,
 }
+
+
+def recall_at_k(ranks, k):
+    return np.mean(ranks <= k)
 
 
 def calculate_score_metrics(labels, scores, groups=None):
@@ -97,24 +101,48 @@ def calculate_classification_metrics(labels, scores, groups=None):
     return metrics
 
 
-def calculated_rank_metrics(labels, score_matrix, k_max=16):
+def calculated_rank_metrics(labels, score_matrix, groups=None, ks=None):
     """
 
     :param labels:
     :param score_matrix:
+    :param groups:
+    :param ks:
+    :params
     :return:
     """
-    #scores_sorted = score_matrix.columns.values()
-    #scores_sorted = score_matrix.columns.values[scores_sorted]
-    #metrics = {}
-    #for k in [1, 5, 10, 25, 50, k_max]:
-    #    if k > k_max:
-    #        continue
-    #    r_at_k = label.isn
-    # R@1, R@5, R@10
-    # Avg rank
-    #
-    return {}
+    if ks is None:
+        ks = []
+    ranked = score_matrix.shape[1] - rankdata(score_matrix.values, axis=1) + 1
+    ranked = pd.DataFrame(data=ranked, index=score_matrix.index, columns=score_matrix.columns)
+
+    ranks = [row[labels.iloc[i]] for i, (_, row) in enumerate(ranked.iterrows())]
+    ranks = pd.DataFrame(data=ranks, columns=["rank"], index=labels.index)
+    ranks["label"] = labels.values
+
+    n_metrics = 1 + len(ks)
+    metric_names = ["AverageRank"] + [f"R@{k}" for k in ks]
+    metric_values = [np.mean(ranks["rank"])] + [recall_at_k(ranks["rank"], k) for k in ks]
+    group_names = ["full_data"] * n_metrics
+    support_values = [len(labels)] * n_metrics
+
+    if groups is not None:
+        for group in set(groups):
+            mask = groups == group
+            ranks_tmp = ranks[mask]
+
+            metric_names += ["AverageRank"] + [f"R@{k}" for k in ks]
+            metric_values += [np.mean(ranks_tmp["rank"])] + [recall_at_k(ranks_tmp["rank"], k) for k in ks]
+            group_names += [group] * n_metrics
+            support_values += [len(ranks)] * n_metrics
+
+    metrics = pd.DataFrame(data={
+        "Group": group_names,
+        "Support": support_values,
+        "Metric": metric_names,
+        "Value": metric_values
+    })
+    return metrics
 
 
 def calculate_correlation_metrics(labels, scores, groups=None):
@@ -132,10 +160,8 @@ def calculate_correlation_metrics(labels, scores, groups=None):
     support_values = [len(labels)] * n_metrics
 
     if groups is not None:
-        supports = {}
         for group in set(groups):
             mask = groups == group
-            supports[group] = sum(mask)
             labels_tmp = labels[mask]
             scores_tmp = scores[mask]
 
