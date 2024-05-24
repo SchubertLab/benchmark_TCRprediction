@@ -23,9 +23,10 @@ class ViralDownloader(AbstractDownloader):
         pass
 
     def extract_data(self):
-        data_beam = pd.read_csv("../data/01_beam-t_clones.csv", index_col=0)
+        path_base = config.path_data
+        data_beam = pd.read_csv(f"{path_base}/../data/01_beam-t_clones.csv", index_col=0)
         data_beam["epitope"] = data_beam["epitope"].str.split("_").str[0]
-        data_covid = pd.read_csv("../data/02_covid_dextramer_clones.csv", index_col=0)
+        data_covid = pd.read_csv(f"{path_base}/../data/02_covid_dextramer_clones.csv", index_col=0)
         df_data = pd.concat([data_beam, data_covid])
         return df_data
 
