@@ -113,7 +113,8 @@ def calculated_rank_metrics(labels, score_matrix, groups=None, ks=None):
     """
     if ks is None:
         ks = []
-    ranked = score_matrix.shape[1] - rankdata(score_matrix.values, axis=1) + 1
+    ranked = np.vstack([rankdata(row.values) for el, row in score_matrix.iterrows()])
+    ranked = score_matrix.shape[1] - ranked + 1
     ranked = pd.DataFrame(data=ranked, index=score_matrix.index, columns=score_matrix.columns)
 
     ranks = [row[labels.iloc[i]] for i, (_, row) in enumerate(ranked.iterrows())]
