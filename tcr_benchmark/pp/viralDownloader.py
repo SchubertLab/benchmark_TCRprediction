@@ -67,7 +67,10 @@ class ViralDownloader(AbstractDownloader):
         df_data = df_data[df_data["Epitope"].isin(large_epitopes)]
 
         df_data = df_data[df_data[config.col_cdr3a].str.len() <= 19]
+        df_data = df_data[df_data[config.col_cdr3a].str.len() >= 8]
         df_data = df_data[df_data[config.col_cdr3b].str.len() <= 19]
+        df_data = df_data[df_data[config.col_cdr3b].str.len() >= 8]
+
         df_data = df_data.reset_index(drop=True)
         return df_data
 
