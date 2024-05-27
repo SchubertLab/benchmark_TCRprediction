@@ -13,8 +13,8 @@ class ViralDownloader(AbstractDownloader):
             "IR_VJ_1_junction_aa": config.col_cdr3a,
             "IR_VDJ_1_junction_aa": config.col_cdr3b,
             "IR_VJ_1_v_call": config.col_va,
-            "IR_VDJ_1_v_call": config.col_ja,
-            "IR_VJ_1_j_call": config.col_vb,
+            "IR_VDJ_1_v_call": config.col_vb,
+            "IR_VJ_1_j_call": config.col_ja,
             "IR_VDJ_1_j_call": config.col_jb,
             "epitope": config.col_epitope,
         }
@@ -29,6 +29,9 @@ class ViralDownloader(AbstractDownloader):
         data_covid = pd.read_csv(f"{path_base}/../data/02_covid_dextramer_clones.csv", index_col=0)
         df_data = pd.concat([data_beam, data_covid])
         df_data = df_data.drop(columns=["IR_VJ_1_c_call", "IR_VDJ_1_c_call", "IR_VJ_1_d_call", "IR_VDJ_1_d_call"])
+        for col in df_data.columns:
+            if "_call" in col:
+                df_data[col] = df_data[col].astype(str) + "*01"
         return df_data
 
     def standardize_data(self, df_data):
