@@ -84,3 +84,28 @@ tulip-tcr:
                 model:
                         MULTI_TCR: pretrained/multiTCR_s_mhcX_2_below20out
                         FINETUNDE: mhla0201_finetuned/multiTCR_s_mhcXfintune2
+nettcr:
+        repository: ${PATH_EPYTOPE}/external/NetTCR-2.2
+        conda: epytope_torch11
+        options:
+                model:
+                        t.0.v.1: t.0.v.1
+                        t.0.v.2: t.0.v.2
+                        t.0.v.3: t.0.v.3
+                        t.0.v.4: t.0.v.4
+                        t.1.v.0: t.1.v.0
+                        t.1.v.2: t.1.v.2
+                        t.1.v.3: t.1.v.3
+                        t.1.v.4: t.1.v.4
+                        t.2.v.0: t.2.v.0
+                        t.2.v.1: t.2.v.1
+                        t.2.v.3: t.2.v.3
+                        t.2.v.4: t.2.v.4
+                        t.3.v.0: t.3.v.0
+                        t.3.v.1: t.3.v.1
+                        t.3.v.2: t.3.v.2
+                        t.3.v.4: t.3.v.4
+                        t.4.v.0: t.4.v.0
+                        t.4.v.1: t.4.v.1
+                        t.4.v.2: t.4.v.2
+                        t.4.v.3: t.4.v.3
