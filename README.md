@@ -39,12 +39,13 @@ download_datasets("all")
 results = evaluate_predictor(prediction_func, predictor_name, datasets, config)
 ```
 - prediction_func: python function that obeys the following interface
-  - input: a pandas data frame of the columns ['', '', ...]
+  - input: a pandas data frame of the columns ['', '', ...] #todo
   - output: the input pandas dataframe with the additional columns <predictor_name> containing binding scores with higher scores representing higher binding probabilities
 - predictor_name: str, name of your predictor
 - datasets:
-  - Viral dataset: 'viral' #todo:check
-  - Mutational dataset: 'mutations' #todo:check
+  - Viral dataset: 'viral'
+  - Mutational dataset: 'mutation'
+  - Both datasets: 'all'
 - configs: kwargs that will forwarded to your prediction function
 
 ## Cite
