@@ -1,7 +1,10 @@
-conda env create -f /epytope/external/environment.yml
+#!/usr/bin/env bash
+# Script to install environments
+
+conda env create -f /benchmark_TCRprediction/docker/envs/epytope_base.yml
 conda env create -f /external/ImRex/environment.yml
-conda env create -f /epytope/external/ergo.yml
-conda env create -f /epytope/external/atm.yml
-conda env create -f /epytope/external/tcellmatch.yml
-conda env create -f /epytope/external/titan.yml
+conda env create -f /benchmark_TCRprediction/docker/envs/epytope_torch21.yml
+conda env create -f /benchmark_TCRprediction/docker/envs/epytope_torch11.yml
+conda env create -f /benchmark_TCRprediction/docker/envs/epytope_numpy195.yml
+conda env create -f /benchmark_TCRprediction/docker/envs/epytope_torch111.yml
 conda create --name epytope_stapler python=3.9

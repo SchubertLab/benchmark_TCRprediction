@@ -1,0 +1,51 @@
+bertrand: 
+        repository: /external/bertrand
+        conda: epytope_base
+imrex: 
+        conda: deepTCR
+ergo-ii: 
+        repository: /external/ERGO-II
+        conda: epytope_torch21
+ergo-i: 
+        repository: /external/ERGO
+        conda: epytope_torch21
+titan: 
+        conda: epytope_torch111
+teinet: 
+        repository: /external/TEINet
+        conda: epytope_torch11
+epitcr: 
+        repository: /external/epiTCR
+        conda: epytope_base
+atm-tcr: 
+        repository: /external/ATM-TCR
+        conda: epytope_torch11
+        cuda: True
+dlptcr: 
+        repository: /external/DLpTCR
+        conda: epytope_base
+pmtnet: 
+        repository: /external/pMTnet
+        conda: epytope_torch21
+attntap: 
+        repository: /external/AttnTAP
+        conda: epytope_base
+teim: 
+        repository: /external/TEIM
+        conda: epytope_base
+panpep:
+        repository: /external/PanPep
+        conda: epytope_torch11
+stapler: 
+        conda: epytope_stapler
+tcellmatch:
+        conda: epytope_numpy195
+nettcr:
+        repository: /external/NetTCR-2.2
+        conda: epytope_torch21
+itcep:
+        repository: /external/iTCep
+        conda: epytope_torch21 
+tulip-tcr:
+        repository: /external/TULIP-TCR
+        conda: epytope_base

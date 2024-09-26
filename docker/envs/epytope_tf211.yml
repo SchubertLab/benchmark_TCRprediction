@@ -1,4 +1,4 @@
-name: nettcr
+name: epytope_tf211
 channels:
   - bioconda
   - conda-forge

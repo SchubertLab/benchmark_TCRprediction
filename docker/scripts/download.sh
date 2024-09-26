@@ -1,47 +1,61 @@
 #!/usr/bin/env bash
+# Script to download all repositories and model weights
 
 mkdir /external
 cd /external
-#TEIM
+# TEIM
 git clone https://github.com/pengxingang/TEIM.git
-#epiTCR
+
+# epiTCR
 git clone https://github.com/ddiem-ri-4D/epiTCR.git
 unzip /external/epiTCR/models/rdforestWithoutMHCModel.pickle.zip -d /external/epiTCR/models
 unzip /external/epiTCR/models/rdforestWithMHCModel.pickle.zip -d /external/epiTCR/models
 unzip /external/epiTCR/data/hlaCovertPeudoSeq/HLAWithPseudoSeq.csv.zip -d /external/epiTCR/data/hlaCovertPeudoSeq
-#AttnTAP
+
+# AttnTAP
 git clone https://github.com/Bioinformatics7181/AttnTAP.git
-#TULIP-TCR
+
+# TULIP-TCR
 git clone https://github.com/barthelemymp/TULIP-TCR.git
-#TEINet
+
+# TEINet
 git clone https://github.com/jiangdada1221/TEINet.git
 cd /external/TEINet
 mkdir models
 cd models
 pip install -U --no-cache-dir gdown --pre && gdown https://drive.google.com/uc?id=12pVozHhRcGyMBgMlhcjgcclE3wlrVO32
-#ERGO
+
+# ERGO
 cd /external
 git clone https://github.com/louzounlab/ERGO.git
-#ERGO2
+
+# ERGO2
 git clone https://github.com/IdoSpringer/ERGO-II.git
-#bertrand
+
+# bertrand
 git clone https://github.com/SFGLab/bertrand.git
 cd /external/bertrand
 mkdir models
 gdown https://drive.google.com/uc?id=1FywbDbzhhYbwf99MdZrpYQEbXmwX9Zxm
 unzip /external/bertrand/bertrand-checkpoint.zip -d /external/bertrand/models
-#ATM-TCR
+
+# ATM-TCR
 cd /external
 git clone https://github.com/Lee-CBG/ATM-TCR.git
-#pMTnet - works
+
+# pMTnet - works
 git clone https://github.com/tianshilu/pMTnet.git
-#PanPep
+
+# PanPep
 git clone https://github.com/bm2-lab/PanPep.git
-#iTCep
+
+# iTCep
 git clone https://github.com/kbvstmd/iTCep.git
-#DLpTCR
+
+# DLpTCR
 git clone https://github.com/JiangBioLab/DLpTCR
-#STAPLER
+
+# STAPLER
 git clone https://github.com/NKI-AI/STAPLER.git
 cd /external/STAPLER
 mkdir model
@@ -57,20 +71,24 @@ cd ..
 mkdir pretrained_model
 cd pretrained_model
 wget https://files.aiforoncology.nl/stapler/model/pretrained_model/pre-cdr3_combined_epoch%3D437-train_mlm_loss%3D0.702.ckpt
-#tcellmatch
+
+# tcellmatch
 cd /external
 git clone https://github.com/theislab/tcellmatch.git
 cd tcellmatch
 wget -O models.zip https://figshare.com/ndownloader/files/43082557
 unzip models.zip
 mv msb199416-sup-0005-DatasetEV4 models
-#NetTCR-2.2
+
+# NetTCR-2.2
 cd /external
 git clone https://github.com/mnielLab/NetTCR-2.2.git
 git clone https://github.com/oxpig/ANARCI.git
-#ImRex
+
+# ImRex
 git clone https://github.com/pmoris/ImRex.git
-#TITAN
+
+# TITAN
 cd /external
 git clone https://github.com/PaccMann/TITAN.git
 cd /external/TITAN/datasets

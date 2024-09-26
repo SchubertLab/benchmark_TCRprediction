@@ -1,4 +1,4 @@
-name: epytope_torch11_1
+name: epytope_torch111
 channels:
   - conda-forge
   - bioconda
