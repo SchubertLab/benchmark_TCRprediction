@@ -1,9 +1,60 @@
 import pandas as pd
-import requests
-import os
 
 import tcr_benchmark.utils.config as config
 from tcr_benchmark.pp.abstractDownloader import AbstractDownloader
+
+
+# The following TCRs beta chains with matching epitope were found in public databases
+OVERLAP_LIST = [
+    'CASSSRSSYEQYF',
+    'CASSIRSAYEQYF',
+    'CASSIRSSYEQYF',
+    'CASSVRSSYEQYF',
+    'CASSTRSAYEQYF',
+    'CASSARSTGELFF',
+    'CASSIRSTGELFF',
+    'CASSGRSTDTQYF',
+    'CASSQRSTDTQYF',
+    'CASSPRSTDTQYF',
+    'CASSVRSTGELFF',
+    'CASSTRSSYEQYF',
+    'CASSTRSTDTQYF',
+    'CASSTRSTGELFF',
+    'CASSIRASYEQYF',
+    'CASSVRSTDTQYF',
+    'CASSIRSTDTQYF',
+    'CASSMRSTDTQYF',
+    'CASSIYSGGYNEQFF',
+    'CASSIRSGYEQYF',
+    'CASSIHSNQPQHF',
+    'CASSLQNTGELFF',
+    'CASGDENTGELFF',
+    'CATQEGNTGELFF',
+    'CASSPDIEAFF',
+    'CASSEGQGYEQYF',
+    'CASSRRSTDTQYF',
+    'CASSFRSTGELFF',
+    'CASSNRASYEQYF',
+    'CASSGRSSDTQYF',
+    'CASSLRSTDTQYF',
+    'CASSARSTDTQYF',
+    'CASNPDRNTGELFF',
+    'CASSLDIEAFF',
+    'CASSLTNEQFF',
+    'CASSPPGGGNTGELFF',
+    'CASSPTGGSYGYTF',
+    'CASSIRSGWEQFF',
+    'CASSPWGGNTEAFF',
+    'CASQDLNTGELFF',
+    'CASSDLNTGELFF',
+    'CASSPDIEQFF',
+    'CASQDQNTGELFF',
+    'CASSELAGGNTGELFF',
+    'CARGQENTGELFF',
+    'CASSPPAGGNTGELFF',
+    'CASQDANTGELFF',
+    'CASSIRSAYEQFF'
+]
 
 
 class ViralDownloader(AbstractDownloader):
@@ -72,6 +123,8 @@ class ViralDownloader(AbstractDownloader):
         df_data = df_data[df_data[config.col_cdr3a].str.len() <= 19]
         df_data = df_data[df_data[config.col_cdr3b].str.len() <= 19]
         df_data = df_data[df_data[config.col_cdr3b].str[-1] == "F"]
+
+        df_data = df_data[~df_data["CDR3_beta"].isin(OVERLAP_LIST)]
 
         df_data = df_data.reset_index(drop=True)
         return df_data
