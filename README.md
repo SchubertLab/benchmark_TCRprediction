@@ -9,13 +9,13 @@ pip install tcr-benchmark
 
 Benchmark-Suite with ePytope:
 
-Note: you will need to install the individual predictors, separately. You may consult the apptainer recipe in `./container/benchmark.def`
+Note: you will need to install the individual predictors, separately. You may consult the dockerfile in `./docker/Dockerfile`
 ```
 pip install tcr-benchmark[epytope]
 ```
 
 Reproducibility:
-To reproduce the environment of the paper. To reproduce the specific environment of the predictors, we advise to use the apptainer recipe in `./container/benchmark.def`
+To reproduce the environment of the paper. To reproduce the specific environment of the predictors, we advise to use the dockerfile in `./docker/Dockerfile`
 ```
 pip install tcr-benchmark[epytope]
 ```
@@ -24,7 +24,10 @@ pip install tcr-benchmark[epytope]
 To reproduce the benchmark you can
 ```
 git clone https://github.com/SchubertLab/benchmark_TCRprediction.git
-TODO: description how to build the apptainer
+cd benchmark_TCRprediction
+sudo docker build -t img_benchmark -f ./docker/Dockerfile ..
+sudo docker run --gpus all -d --name ctr_benchmark -p 8001 img_benchmark
+sudo docker exec -it ctr_benchmark /bin/bash
 ```
 
 ## Test own Method
@@ -36,49 +39,41 @@ from tcr_benchmark.study.benchmark import evaluate_predictor
 download_datasets("all")
 results = evaluate_predictor(prediction_func, predictor_name, datasets, config)
 ```
---- todo: interface prediction function
-
-## Components
-```
-|
-|
-|
-```
+- prediction_func: python function that obeys the following interface
+  - input: a pandas data frame of the columns ['', '', ...] #todo
+  - output: the input pandas dataframe with the additional columns <predictor_name> containing binding scores with higher scores representing higher binding probabilities
+- predictor_name: str, name of your predictor
+- datasets:
+  - Viral dataset: 'viral'
+  - Mutational dataset: 'mutation'
+  - Both datasets: 'all'
+- configs: kwargs that will forwarded to your prediction function
 
 ## Cite
-When you reference the benchmark or use the provided utilities to evaluate your method please cite:
+When you reference the benchmark or use the provided utilities to evaluate your method please cite the benchmarking paper and the corresponding datasets:
 ```
 todo
 ```
 
-If you use the datasets, please also cite their original publication:
-### Francis-Dataset
+### Viral Dataset
 ```
-todo
+todo: Kocher, Drost et al.
 ```
 
-### Minervina-Dataset
+
 ```
-@article{minervina2022sars,
-  title={SARS-CoV-2 antigen exposure history shapes phenotypes and specificity of memory CD8+ T cells},
-  author={Minervina, Anastasia A and Pogorelyy, Mikhail V and Kirk, Allison M and Crawford, Jeremy Chase and Allen, E Kaitlynn and Chou, Ching-Heng and Mettelman, Robert C and Allison, Kim J and Lin, Chun-Yang and Brice, David C and others},
-  journal={Nature Immunology},
-  volume={23},
-  number={5},
-  pages={781--790},
-  year={2022},
-  publisher={Nature Publishing Group US New York}
-}
+todo: 10x Genomics
 ```
 
 ### Mutation-Dataset (Dorigatti et al.)
 ```
-@article{dorigatti2023predicting,
-  title={Predicting T Cell Receptor Functionality against Mutant Epitopes},
-  author={Dorigatti, Emilio and Drost, Felix and Straub, Adrian and Hilgendorf, Philipp and Wagner, Karolin Isabel and Bischl, Bernd and Busch, Dirk and Schober, Kilian and Schubert, Benjamin},
-  journal={bioRxiv},
-  pages={2023--05},
-  year={2023},
-  publisher={Cold Spring Harbor Laboratory}
+@article{drost2024predicting,
+  title={Predicting T cell receptor functionality against mutant epitopes},
+  author={Drost, Felix and Dorigatti, Emilio and Straub, Adrian and Hilgendorf, Philipp and Wagner, Karolin I and Heyer, Kersten and Montes, Marta L{\'o}pez and Bischl, Bernd and Busch, Dirk H and Schober, Kilian and Schubert, Benjamin},
+  journal={Cell Genomics},
+  volume={4},
+  number={9},
+  year={2024},
+  publisher={Elsevier}
 }
 ```
