@@ -27,7 +27,7 @@ RUN git clone https://github.com/SchubertLab/epytope.git
 SHELL ["/bin/bash", "-c"]
 
 # Benchmark tool
-COPY ../benchmark_TCRprediction /benchmark_TCRprediction
+COPY ./benchmark_TCRprediction /benchmark_TCRprediction
 
 
 # External tools
