@@ -14,7 +14,7 @@ class ViralTest(AbstractTest):
         super().__init__("viral", path_out)
         self.test_settings = {
             "MPS": self.run_multiple_peptide_selection_test,
-            # "TTP": self.run_tcr_peptide_pairing_test,
+            "TTP": self.run_tcr_peptide_pairing_test,
         }
         self.test_data = None
 
@@ -58,6 +58,7 @@ class ViralTest(AbstractTest):
         labels = labels.apply(lambda x: "".join([x[el] * el for el in epitopes]), axis=1)
 
         scores = metrics.calculated_rank_metrics(labels, prediction, labels, [1, 3, 5, 8])
+        scores["Dataset"] = "Viral"
         return scores
 
     def run_tcr_peptide_pairing_test(self, prediction):

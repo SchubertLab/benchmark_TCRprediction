@@ -135,7 +135,7 @@ def calculated_rank_metrics(labels, score_matrix, groups=None, ks=None):
             metric_names += ["AverageRank"] + [f"R@{k}" for k in ks]
             metric_values += [np.mean(ranks_tmp["rank"])] + [recall_at_k(ranks_tmp["rank"], k) for k in ks]
             group_names += [group] * n_metrics
-            support_values += [len(ranks)] * n_metrics
+            support_values += [len(ranks_tmp)] * n_metrics
 
     metrics = pd.DataFrame(data={
         "Group": group_names,
