@@ -26,7 +26,7 @@ To reproduce the benchmark you can
 git clone https://github.com/SchubertLab/benchmark_TCRprediction.git
 cd benchmark_TCRprediction
 sudo docker build -t img_benchmark -f ./docker/Dockerfile ..
-sudo docker run -d --name ctr_benchmark -p 8001 img_benchmark
+sudo docker run --gpus all -d --name ctr_benchmark -p 8001 img_benchmark
 sudo docker exec -it ctr_benchmark /bin/bash
 ```
 
