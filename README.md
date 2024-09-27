@@ -36,6 +36,7 @@ conda activate epyotpe_base
 ./scripts/run_viral.sh
 ./scripts/run_mutations.sh
 ```
+The results can be found in ./results/... .
 
 ## Test own Method
 To test your own method, you can use the programmatic interface:
