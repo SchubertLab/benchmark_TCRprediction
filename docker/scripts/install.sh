@@ -18,18 +18,18 @@ conda run -n epytope_stapler pip install x-transformers==0.22.3
 
 # ePytope
 cd /epytope
-conda run -n epytope conda install -c conda-forge ncurses -y
-conda run -n epytope conda install libgcc==7.2.0
-conda run -n epytope pip install -e .
+conda run -n epytope_base conda install -c conda-forge ncurses -y
+conda run -n epytope_base conda install libgcc==7.2.0
+conda run -n epytope_base pip install -e .
 
 # Benchmark Suite
 cd /benchmark_TCRprediction
-conda run -n epytope pip install -e .
+conda run -n epytope_base pip install -e .
 
 # TITAN
 cd /external/TITAN
-conda run -n epytope_torch11_1 pip install -e .
-conda run -n epytope_torch11_1 pip install biopython==1.81 pytoda==1.1.3
+conda run -n epytope_torch111 pip install -e .
+conda run -n epytope_torch111 pip install biopython==1.81 pytoda==1.1.3
 
 # TCR tools
 cd /external/ANARCI
