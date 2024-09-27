@@ -21,13 +21,20 @@ pip install tcr-benchmark[epytope]
 ```
 
 ## Reproduce Benchmark
-To reproduce the benchmark you can
+To setup the a docker container with all tools:
 ```
 git clone https://github.com/SchubertLab/benchmark_TCRprediction.git
 cd benchmark_TCRprediction
 sudo docker build -t img_benchmark -f ./docker/Dockerfile ..
 sudo docker run --gpus all -d --name ctr_benchmark -p 8001 img_benchmark
 sudo docker exec -it ctr_benchmark /bin/bash
+```
+
+Within the docker container, you can reproduce the benchmark via
+```
+conda activate epyotpe_base
+./scripts/run_viral.sh
+./scripts/run_mutations.sh
 ```
 
 ## Test own Method
