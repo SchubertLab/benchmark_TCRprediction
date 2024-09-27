@@ -33,6 +33,9 @@ def evaluate_predictor_on_dataset(prediction_func, predictor_name, dataset_name,
 
 def form_options(config, base_name):
     base_config = config.copy()
+    if "options" not in base_config:
+        return {base_name: base_config}
+
     options = base_config.pop("options")
 
     all_configs = {base_name: base_config}
