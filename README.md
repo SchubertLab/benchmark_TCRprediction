@@ -32,7 +32,7 @@ sudo docker exec -it ctr_benchmark /bin/bash
 
 Within the docker container, you can reproduce the benchmark via
 ```
-conda activate epyotpe_base
+conda activate epytope_base
 ./scripts/run_viral.sh
 ./scripts/run_mutations.sh
 ```
