@@ -36,7 +36,7 @@ conda activate epyotpe_base
 ./scripts/run_viral.sh
 ./scripts/run_mutations.sh
 ```
-The results can be found in ./results/... .
+The results can be found in `./results/*` and `./tcr_benchmark/results/*`. Please note, that despite best efforts, not all tools are fully reproducible.
 
 ## Test own Method
 To test your own method, you can use the programmatic interface:
