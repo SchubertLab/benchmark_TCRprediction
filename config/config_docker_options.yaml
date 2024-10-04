@@ -95,7 +95,6 @@ dlptcr:
         conda: epytope_base
         options:
                 model_type:
-                        ALPHA_BETA: AB 
                         ALPHA: A
                         BETA: B
 
