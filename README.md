@@ -1,23 +1,23 @@
 # Benchmarking T cell receptor - Epitope Predictors with ePytope
-This repository contains the code to recreate the study "todo" by Drost et al.
+This repository contains the code to recreate the study "Benchmarking of T-Cell Receptor-Epitope Predictors with ePytope-TCR" by Drost et al.
 
 ## Install
 Stand-alone Benchmark-Suite:
 ```
-pip install tcr-benchmark
+pip install -e .
 ```
 
 Benchmark-Suite with ePytope:
 
 Note: you will need to install the individual predictors, separately. You may consult the dockerfile in `./docker/Dockerfile`
 ```
-pip install tcr-benchmark[epytope]
+pip install -e .[epytope]
 ```
 
 Reproducibility:
 To reproduce the environment of the paper. To reproduce the specific environment of the predictors, we advise to use the dockerfile in `./docker/Dockerfile`
 ```
-pip install tcr-benchmark[epytope]
+pip install -e .[epytope]
 ```
 
 ## Reproduce Benchmark
@@ -60,17 +60,40 @@ results = evaluate_predictor(prediction_func, predictor_name, datasets, config)
 ## Cite
 When you reference the benchmark or use the provided utilities to evaluate your method please cite the benchmarking paper and the corresponding datasets:
 ```
-todo
+@article{drost2024benchmarking,
+  title={Benchmarking of T-Cell Receptor-Epitope Predictors with ePytope-TCR},
+  author={Drost, Felix and Chernysheva, Anna and Albahah, Mahmoud and Kocher, Katharina and Schober, Kilian and Schubert, Benjamin},
+  journal={bioRxiv},
+  pages={2024--11},
+  year={2024},
+  publisher={Cold Spring Harbor Laboratory}
+}
 ```
 
 ### Viral Dataset
 ```
-todo: Kocher, Drost et al.
+@article{kocher2024quality,
+  title={Quality of vaccination-induced T cell responses is conveyed by polyclonality and high, but not maximum, antigen receptor avidity},
+  author={Kocher, Katharina and Drost, Felix and Tesfaye, Abel Mekonnen and Moosmann, Carolin and Schuelein, Christine and Grotz, Myriam and D'Ippolito, Elvira and Graw, Frederik and Spriewald, Bernd and Busch, Dirk H and others},
+  journal={bioRxiv},
+  pages={2024--10},
+  year={2024},
+  publisher={Cold Spring Harbor Laboratory}
+}
 ```
 
 
 ```
-todo: 10x Genomics
+@article{adams2023integrated,
+  title={An integrated reagent and multimodal analysis workflow to enrich and characterize peptide-specific CD8+ T cells},
+  author={Adams, Bruce A and Shahi, Payam and Reyes, Daniel and Maheshwari, Shamoni and Mousavi, Nima and Krishnan, Sreenath and Ramen, Nandhini and Tsai, FuNien and Kumar, Poornasree and Finnegan, Peter and others},
+  journal={The Journal of Immunology},
+  volume={210},
+  number={1\_Supplement},
+  pages={249--17},
+  year={2023},
+  publisher={American Association of Immunologists}
+}
 ```
 
 ### Mutation-Dataset (Dorigatti et al.)
