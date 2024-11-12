@@ -96,7 +96,7 @@ When you reference the benchmark or use the provided utilities to evaluate your 
 }
 ```
 
-### Mutation-Dataset (Dorigatti et al.)
+### Mutation-Dataset
 ```
 @article{drost2024predicting,
   title={Predicting T cell receptor functionality against mutant epitopes},
