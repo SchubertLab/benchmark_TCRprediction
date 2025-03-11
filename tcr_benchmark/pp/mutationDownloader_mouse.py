@@ -67,6 +67,9 @@ class MutationMouseDownloader(AbstractDownloader):
 
         df_data = df_data.merge(df_seqs, on="TCR", how="left")
         df_data = df_data[df_data["Epitope"] != "SIINFEKL"].copy()
+        tcrs_bind = df_data.groupby("TCR")["Label"].sum()
+        tcrs_bind = tcrs_bind[tcrs_bind>1].index
+        df_data = df_data[df_data["TCR"].isin(tcrs_bind)]
         return df_data
 
     def standardize_data(self, df_data):
