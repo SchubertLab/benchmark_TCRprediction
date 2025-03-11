@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
-# with open('epytope_requirements.txt') as f:
-#    epytope_requirements = f.read().splitlines()
+with open('./docker/envs/reproducability.txt') as f:
+    epytope_requirements = f.read().splitlines()
 
 setup(
     name="tcr_benchmark",
@@ -21,6 +21,6 @@ setup(
         "epytope": [
             "epytope @ git+https://github.com/SchubertLab/epytope"
             ],
-        # "reproducability": epytope_requirements
+        "reproducability": epytope_requirements
     }
 )

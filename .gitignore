@@ -1,6 +1,7 @@
 ./figures/*
 scrubs/*
 .idea/*
+results/*
 data/*
 scripts/cluster*
 __pycache__

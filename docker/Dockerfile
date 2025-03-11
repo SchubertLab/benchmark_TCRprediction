@@ -49,6 +49,8 @@ RUN chmod 777 /benchmark_TCRprediction/docker/scripts/install.sh
 RUN dos2unix /benchmark_TCRprediction/docker/scripts/install.sh
 RUN /benchmark_TCRprediction/docker/scripts/install.sh
 
+# Set starting point
+WORKDIR /benchmark_TCRprediction
 
 EXPOSE 8001
 ENTRYPOINT ["tail", "-f", "/dev/null"]

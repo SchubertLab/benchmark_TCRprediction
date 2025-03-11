@@ -1,0 +1,137 @@
+bertrand: 
+        repository: /external/bertrand
+        conda: epytope_base
+
+titan: 
+        conda: epytope_torch111
+
+atm-tcr: 
+        repository: /external/ATM-TCR
+        conda: epytope_torch11
+        cuda: True
+
+pmtnet: 
+        repository: /external/pMTnet
+        conda: epytope_torch21
+
+teim: 
+        repository: /external/TEIM
+        conda: epytope_base
+
+panpep:
+        repository: /external/PanPep
+        conda: epytope_torch11
+
+stapler: 
+        conda: epytope_stapler
+
+itcep:
+        repository: /external/iTCep
+        conda: epytope_torch21 
+
+tcellmatch:
+        conda: epytope_numpy195
+        options: 
+                model: 
+                        LSTM_CV0: iedb_BILSTM_CONCAT_LEARN_1_1_1_1_1_s_bilstm_cv0
+                        LSTM_CV1: iedb_BILSTM_CONCAT_LEARN_1_1_1_1_1_s_bilstm_cv1
+                        LSTM_CV2: iedb_BILSTM_CONCAT_LEARN_1_1_1_1_1_s_bilstm_cv2
+                        GRU_CV0: iedb_BIGRU_CONCAT_BLOSUM_1_1_1_2_1_s_bigru_cv0
+                        GRU_CV1: iedb_BIGRU_CONCAT_BLOSUM_1_1_1_2_1_s_bigru_cv1
+                        GRU_CV2: iedb_BIGRU_CONCAT_BLOSUM_1_1_1_2_1_s_bigru_cv2
+                        GRU_SEP_CV0: iedb_BIGRU_SEPARATE_BLOSUM_1_1_1_1_1_s_bigru_separate_cv0
+                        GRU_SEP_CV1: iedb_BIGRU_SEPARATE_BLOSUM_1_1_1_1_1_s_bigru_separate_cv1
+                        GRU_SEP_CV2: iedb_BIGRU_SEPARATE_BLOSUM_1_1_1_1_1_s_bigru_separate_cv2
+                        LSTM_SEP_CV0: iedb_BILSTM_SEPARATE_BLOSUM_1_1_1_1_1_s_bilstm_separate_cv0
+                        LSTM_SEP_CV1: iedb_BILSTM_SEPARATE_BLOSUM_1_1_1_1_1_s_bilstm_separate_cv1
+                        LSTM_SEP_CV2: iedb_BILSTM_SEPARATE_BLOSUM_1_1_1_1_1_s_bilstm_separate_cv2
+                        LINEAR_CV0: iedb_LINEAR_CONCAT_BLOSUM_1_1_1_1_1_s_linear_cv0
+                        LINEAR_CV1: iedb_LINEAR_CONCAT_BLOSUM_1_1_1_1_1_s_linear_cv1
+                        LINEAR_CV2: iedb_LINEAR_CONCAT_BLOSUM_1_1_1_1_1_s_linear_cv2
+
+ergo-i:
+        repository: /external/ERGO
+        conda: epytope_torch21
+        options: 
+                model:
+                        AE_VDJDB: ae_vdjdb1
+                        LSTM_VDJDB: lstm_vdjdb1
+                        AE_MCPAS: ae_mcpas1
+                        LSTM_MCPAS: lstm_mcpas1
+
+ergo-ii:
+        repository: /external/ERGO-II
+        conda: epytope_torch21
+        options:
+                dataset:
+                        VDJDB: vdjdb
+                        MCPAS: mcpas
+         
+imrex:
+        conda: deepTCR
+        options:
+                model:
+                        DOWNSAMPLED: 2020-07-24_19-18-39_trbmhcidown-shuffle-padded-b32-lre4-reg001/2020-07-24_19-18-39_trbmhcidown-shuffle-padded-b32-lre4-reg001.h5
+                        FULL: 2020-07-30_11-30-27_trbmhci-shuffle-padded-b32-lre4-reg001/2020-07-30_11-30-27_trbmhci-shuffle-padded-b32-lre4-reg001.h5 
+
+teinet:
+        repository: /external/TEINet
+        conda: epytope_torch11
+        options:
+                model:
+                        LARGE_DS: large_dset
+                        SMALL_DS: teinet_data
+
+epitcr:
+        repository: /external/epiTCR
+        conda: epytope_base
+        options:
+                model:
+                        WITH_MHC: rdforestWithMHCModel
+                        WO_MHC: rdforestWithoutMHCModel
+
+dlptcr:
+        repository: /external/DLpTCR
+        conda: epytope_base
+        options:
+                model_type:
+                        ALPHA: A
+                        BETA: B
+
+attntap:
+        repository: /external/AttnTAP
+        conda: epytope_base
+        options:
+                model:
+                        MCPAS: cv_model_0_mcpas_0
+                        VDJDB: cv_model_0_vdjdb_0
+
+tulip-tcr:
+        repository: /external/TULIP-TCR
+        conda: epytope_base
+
+nettcr:
+        repository: /external/NetTCR-2.2
+        conda: epytope_torch21
+        options:
+                model:
+                        t.0.v.1: t.0.v.1
+                        t.0.v.2: t.0.v.2
+                        t.0.v.3: t.0.v.3
+                        t.0.v.4: t.0.v.4
+                        t.1.v.0: t.1.v.0
+                        t.1.v.2: t.1.v.2
+                        t.1.v.3: t.1.v.3
+                        t.1.v.4: t.1.v.4
+                        t.2.v.0: t.2.v.0
+                        t.2.v.1: t.2.v.1
+                        t.2.v.3: t.2.v.3
+                        t.2.v.4: t.2.v.4
+                        t.3.v.0: t.3.v.0
+                        t.3.v.1: t.3.v.1
+                        t.3.v.2: t.3.v.2
+                        t.3.v.4: t.3.v.4
+                        t.4.v.0: t.4.v.0
+                        t.4.v.1: t.4.v.1
+                        t.4.v.2: t.4.v.2
+                        t.4.v.3: t.4.v.3
