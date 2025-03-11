@@ -64,6 +64,10 @@ class MutationMouseDownloader(AbstractDownloader):
             df_seqs[col] = df_seqs[col].str.split("(").str[0]
             df_seqs[col] = df_seqs[col].str.split(" ").str[0]
             df_seqs[col] = df_seqs[col].str.replace("*00", "*01", regex=False)
+            df_seqs[col] = df_seqs[col].str.replace("-DV", "/DV", regex=False)
+
+        for col in ["CDR3_alpha", "CDR3_beta"]:
+            df_seqs[col] = df_seqs[col].str.strip()
 
         df_data = df_data.merge(df_seqs, on="TCR", how="left")
         df_data = df_data[df_data["Epitope"] != "SIINFEKL"].copy()

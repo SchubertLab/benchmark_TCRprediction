@@ -1,6 +1,5 @@
 #!/bin/bash
-PREDICTORS="bertrand,titan,atm-tcr,teim,panpep,itcep,tcellmatch,ergo-i,ergo-ii,imrex,teinet,epitcr,attntap,tulip-tcr,nettcr"
-PREDICTORS="ergo-i"
+PREDICTORS="bertrand,titan,atm-tcr,teim,panpep,itcep,tcellmatch,ergo-i,ergo-ii,imrex,teinet,epitcr,attntap,tulip-tcr"
 
 mkdir -p results
 python -m tcr_benchmark.study.benchmark_alternatives \
