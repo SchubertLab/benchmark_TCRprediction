@@ -6,10 +6,12 @@ import tcr_benchmark.utils.config as config
 
 from tcr_benchmark.pp.mutationDownloader import MutationDownloader
 from tcr_benchmark.pp.viralDownloader import ViralDownloader
+from tcr_benchmark.pp.mutationDownloader_mouse import MutationMouseDownloader
 
 
 dataset_downloader = {
     "mutation": MutationDownloader,
+    "mutation-mouse": MutationMouseDownloader,
     "viral": ViralDownloader,
 }
 
@@ -40,7 +42,7 @@ def get_all_datasets():
 
 def download_datasets(selection):
     """
-    Download the datasets from Minervina, Francis, and ...
+    Download the datasets from Kocher, and Drost
     :param selection: list(str) or str
     :return: processed datasets, und ../data/{name}.csv
     """
