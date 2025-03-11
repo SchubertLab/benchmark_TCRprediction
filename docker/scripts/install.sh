@@ -14,6 +14,7 @@ conda run -n epytope_stapler pip install stitchr IMGTgeneDL
 conda run -n epytope_stapler pip install -e .
 conda run -n epytope_stapler pip install torch==2.1.0 torchaudio==2.1.0 torchvision==0.16
 conda run -n epytope_stapler stitchrdl -s human
+conda run -n epytope_stapler stitchrdl -s mouse 
 conda run -n epytope_stapler pip install x-transformers==0.22.3
 
 # ePytope
@@ -39,4 +40,5 @@ conda run -n epytope_torch21 conda install -c bioconda hmmer=3.3.2 -y
 conda run -n epytope_torch21 pip install muscle
 conda run -n epytope_torch21 python setup.py install
 conda run -n epytope_torch21 stitchrdl -s human
+conda run -n epytope_torch21 stitchrdl -s mouse 
 conda run -n epytope_torch21 pip install numpy==1.24.1

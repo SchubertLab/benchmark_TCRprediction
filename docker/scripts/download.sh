@@ -100,3 +100,13 @@ python /benchmark_TCRprediction/docker/scripts/process_data_TITAN.py TRBV.txt V_
 python /benchmark_TCRprediction/docker/scripts/process_data_TITAN.py TRBJ.txt J_segment_sequences.fasta
 rm TRBV.txt
 rm TRBJ.txt
+cd ..
+mkdir imgt_mouse
+cd imgt_mouse
+wget -O TRBJ.txt 'https://www.imgt.org/genedb/GENElect?query=7.6+TRBJ&species=Mus+musculus'
+wget -O TRBV.txt 'https://www.imgt.org/genedb/GENElect?query=7.6+TRBV&species=Mus+musculus'
+python /benchmark_TCRprediction/docker/scripts/process_data_TITAN.py TRBV.txt V_segment_sequences.fasta
+python /benchmark_TCRprediction/docker/scripts/process_data_TITAN.py TRBJ.txt J_segment_sequences.fasta
+rm TRBV.txt
+rm TRBJ.txt
+
