@@ -1,0 +1,13 @@
+mixtcrpred: 
+        repository: /external/MixTCRpred
+        conda: epytope_torch21
+nettcr-cat:
+        repository: /external/NetTCR-2.2
+        conda: epytope_torch21
+        options:
+                model:
+                        pretrained: pretrained
+                        peptide: peptide
+tcrgp:
+        repository: /external/TCRGP
+        conda: epytope_tcrgp
