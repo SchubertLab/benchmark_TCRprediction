@@ -10,7 +10,7 @@ conda run -n deepTCR conda install tensorflow==2.1.0
 
 # STAPLER
 cd /external/STAPLER
-conda run -n epytope_stapler pip install stitchr IMGTgeneDL
+conda run -n epytope_stapler pip install stitchr==1.1.3.1 IMGTgeneDL
 conda run -n epytope_stapler pip install -e .
 conda run -n epytope_stapler pip install torch==2.1.0 torchaudio==2.1.0 torchvision==0.16
 conda run -n epytope_stapler stitchrdl -s human
@@ -34,7 +34,7 @@ conda run -n epytope_torch111 pip install biopython==1.81 pytoda==1.1.3
 
 # TCR tools
 cd /external/ANARCI
-conda run -n epytope_torch21 pip install stitchr IMGTgeneDL
+conda run -n epytope_torch21 pip install stitchr==1.1.3.1 IMGTgeneDL
 conda run -n epytope_torch21 conda install -c conda-forge openmm pdbfixer -y
 conda run -n epytope_torch21 conda install -c bioconda hmmer=3.3.2 -y
 conda run -n epytope_torch21 pip install muscle
