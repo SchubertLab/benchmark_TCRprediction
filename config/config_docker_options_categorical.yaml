@@ -1,7 +1,7 @@
 mixtcrpred: 
         repository: /external/MixTCRpred
-        conda: epytope_torch21
-nettcr-cat:
+        conda: epytope_mixtcrpred
+nettcr:
         repository: /external/NetTCR-2.2
         conda: epytope_torch21
         options:

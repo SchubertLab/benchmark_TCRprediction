@@ -110,3 +110,11 @@ python /benchmark_TCRprediction/docker/scripts/process_data_TITAN.py TRBJ.txt J_
 rm TRBV.txt
 rm TRBJ.txt
 
+# MixTCRPred
+cd /external
+git clone https://github.com/GfellerLab/MixTCRpred.git
+
+# TCRGP
+cd /external
+git clone https://github.com/emmijokinen/TCRGP.git
+
