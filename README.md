@@ -42,6 +42,10 @@ The results can be found in `./results/*` and `./tcr_benchmark/results/*`. Pleas
 To test your own method, please refer to this notebook:
 https://github.com/SchubertLab/benchmark_TCRprediction/blob/master/tutorials/01_new_method.ipynb
 
+## Create own Tests
+To create your own tests, please refer to this notebook:
+[https://github.com/SchubertLab/benchmark_TCRprediction/blob/master/tutorials/01_new_method.ipynb](https://github.com/SchubertLab/benchmark_TCRprediction/blob/master/tutorials/02_new_test.ipynb)
+
 ## Cite
 When you reference the benchmark or use the provided utilities to evaluate your method please cite the benchmarking paper and the corresponding datasets:
 ```
