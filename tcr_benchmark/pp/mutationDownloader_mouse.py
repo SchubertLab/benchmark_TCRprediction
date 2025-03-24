@@ -51,7 +51,7 @@ class MutationMouseDownloader(AbstractDownloader):
         df_data = pd.melt(df_data, id_vars=["Epitope"], value_vars=df_data.columns[1:], var_name="TCR",
                           value_name="Activation Score")
         df_data["Label"] = df_data["Activation Score"].apply(lambda x: 1 if x > 46.9 else 0)
-        df_data["MHC"] = "H-2Kb"
+        df_data["MHC"] = "H2-Kb"
 
         df_seqs = pd.read_excel(f"{self.path_tmp}_{i}.xlsx", sheet_name="TCR_info", engine="openpyxl", skiprows=1)
         if i == 1:
@@ -64,11 +64,15 @@ class MutationMouseDownloader(AbstractDownloader):
             df_seqs[col] = df_seqs[col].str.split("(").str[0]
             df_seqs[col] = df_seqs[col].str.split(" ").str[0]
             df_seqs[col] = df_seqs[col].str.replace("*00", "*01", regex=False)
+            df_seqs[col] = df_seqs[col].str.replace("-DV", "/DV", regex=False)
+
+        for col in ["CDR3_alpha", "CDR3_beta"]:
+            df_seqs[col] = df_seqs[col].str.strip()
 
         df_data = df_data.merge(df_seqs, on="TCR", how="left")
         df_data = df_data[df_data["Epitope"] != "SIINFEKL"].copy()
         tcrs_bind = df_data.groupby("TCR")["Label"].sum()
-        tcrs_bind = tcrs_bind[tcrs_bind>1].index
+        tcrs_bind = tcrs_bind[tcrs_bind > 0].index
         df_data = df_data[df_data["TCR"].isin(tcrs_bind)]
         return df_data
 

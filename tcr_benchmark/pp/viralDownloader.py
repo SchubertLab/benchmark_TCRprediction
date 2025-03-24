@@ -127,6 +127,7 @@ class ViralDownloader(AbstractDownloader):
         df_data = df_data[~df_data["CDR3_beta"].isin(OVERLAP_LIST)]
 
         df_data = df_data.reset_index(drop=True)
+        df_data["dataset"] = "viral"
         return df_data
 
     def clean_up(self):

@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import warnings
 from sklearn.metrics import roc_auc_score, average_precision_score, precision_recall_curve
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
 from scipy.stats import pearsonr, spearmanr, rankdata
@@ -116,6 +117,14 @@ def calculated_rank_metrics(labels, score_matrix, groups=None, ks=None):
     ranked = np.vstack([rankdata(row.values) for el, row in score_matrix.iterrows()])
     ranked = score_matrix.shape[1] - ranked + 1
     ranked = pd.DataFrame(data=ranked, index=score_matrix.index, columns=score_matrix.columns)
+
+
+    mask_available = labels.values != ""
+    delta = len(labels) - sum(mask_available)
+    if delta != 0:
+        warnings.warn(f"Filtering {delta} values as epitope prediction not available")
+    labels = labels[mask_available]
+    ranked = ranked[mask_available]
 
     ranks = [row[labels.iloc[i]] for i, (_, row) in enumerate(ranked.iterrows())]
     ranks = pd.DataFrame(data=ranks, columns=["rank"], index=labels.index)

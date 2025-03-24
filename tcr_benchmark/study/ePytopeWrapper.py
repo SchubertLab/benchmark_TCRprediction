@@ -10,7 +10,7 @@ def wrapp_predictor(name):
 
     def prediction_function(df_data, **kwargs):
         df_epytope = df_data.copy()
-        df_epytope["organism"] = "Homo Sapiens"
+        df_epytope["organism"] = "Homo Sapiens" if "SIINFEKL" not in df_data["dataset"].values else "MusMusculus"
         df_epytope["celltype"] = "T cell"
         df_epytope["VJ_chain_type"] = "TRA"
         df_epytope["VDJ_chain_type"] = "TRB"
@@ -34,6 +34,7 @@ def wrapp_predictor(name):
         prediction = prediction.drop(columns=["celltype", "organism", "VDJ_chain_type", "VJ_chain_type"])
         prediction = prediction.rename(columns={k: v for v, k in rename_dict.items()})
         prediction = prediction.drop_duplicates(list(rename_dict.keys()))
+        prediction["MHC"] = prediction["MHC"].replace("H-2-Kb", "H2-Kb")
 
         df_data = pd.merge(df_data, prediction, "left", list(rename_dict.keys()))
         df_data.columns = list(df_data.columns[:-1]) + ["Score"]

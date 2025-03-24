@@ -28,8 +28,6 @@ class MutationMouseTest(AbstractTest):
         return prediction
 
     def run_classification_test(self, prediction):
-        prediction = prediction[prediction["TCR"].str.startswith("R")]
-
         scores = []
         scores_score = metrics.calculate_score_metrics(prediction["Label"], prediction["Score"], prediction["TCR"])
         scores_score["Dataset"] = "SIINFEKL"
@@ -43,8 +41,6 @@ class MutationMouseTest(AbstractTest):
         return scores
 
     def run_regression_test(self, prediction):
-        prediction = prediction[prediction["TCR"].str.startswith("R")]
-
         scores = []
         scores_corr = metrics.calculate_correlation_metrics(prediction["Activation Score"], prediction["Score"],
                                                             prediction["TCR"])
