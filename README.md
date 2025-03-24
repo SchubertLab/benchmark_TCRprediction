@@ -39,23 +39,8 @@ conda activate epytope_base
 The results can be found in `./results/*` and `./tcr_benchmark/results/*`. Please note, that despite best efforts, not all tools are fully reproducible.
 
 ## Test own Method
-To test your own method, you can use the programmatic interface:
-```
-from tcr_benchmark.pp.datasets import download_datasets
-from tcr_benchmark.study.benchmark import evaluate_predictor
-
-download_datasets("all")
-results = evaluate_predictor(prediction_func, predictor_name, datasets, config)
-```
-- prediction_func: python function that obeys the following interface
-  - input: a pandas data frame of the columns ['', '', ...] #todo
-  - output: the input pandas dataframe with the additional columns <predictor_name> containing binding scores with higher scores representing higher binding probabilities
-- predictor_name: str, name of your predictor
-- datasets:
-  - Viral dataset: 'viral'
-  - Mutational dataset: 'mutation'
-  - Both datasets: 'all'
-- configs: kwargs that will forwarded to your prediction function
+To test your own method, please refer to this notebook:
+https://github.com/SchubertLab/benchmark_TCRprediction/blob/master/tutorials/01_new_method.ipynb
 
 ## Cite
 When you reference the benchmark or use the provided utilities to evaluate your method please cite the benchmarking paper and the corresponding datasets:
