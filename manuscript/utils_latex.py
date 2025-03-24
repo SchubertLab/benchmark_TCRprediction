@@ -27,7 +27,11 @@ def to_print_df(df_performance, metrics, n_top=3, grouping='Epitope'):
 
     df_tmp = df_performance[df_performance['Metric'].isin(metrics)]
     df_tmp = df_tmp[df_tmp['Group']=='full_data']
-    df_tmp = df_tmp.groupby(['BaseModel', 'Metric'])['Value'].mean().unstack()[metrics]
+    df_tmp = df_tmp.groupby(['BaseModel', 'Metric'])['Value'].mean().unstack()
+    for col in metrics:
+        if col not in df_tmp.columns:
+            df_tmp[col] = '-'
+    df_tmp = df_tmp[metrics]
     def format_mean(mean, n_top=3):
         best_vals = mean.nlargest(n=n_top).index
         if mean.name == 'Rank':
@@ -36,12 +40,14 @@ def to_print_df(df_performance, metrics, n_top=3, grouping='Epitope'):
         vals_print = [f'\\textbf{{{el}}}' if idx in best_vals else el
                      for idx, el in zip(mean.index, vals_print)]
         return vals_print
-    df_tmp = df_tmp.apply(format_mean, axis=0)
+    if len(df_tmp) > 0:
+        df_tmp = df_tmp.apply(format_mean, axis=0)
     df_tmp.columns = pd.MultiIndex.from_tuples([('Full Data', el) for el in df_tmp.columns])
     df_tmp.index.name = None
 
     df_tmp = pd.concat([df_tmp, df_combined], axis=1)
     df_tmp.index = df_tmp.index.map(mapper_methods)
+    df_tmp = df_tmp.fillna("-")
     return df_tmp
 
 

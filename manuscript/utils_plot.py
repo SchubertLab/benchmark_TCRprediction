@@ -11,7 +11,7 @@ LINEWIDTH = 3
 
 
 
-def plot_barplot(df_performance, metric, n_top=5, sort_by='Average', cmap='Greens', ax=None, rdm=None):
+def plot_barplot(df_performance, metric, n_top=5, sort_by='Average', cmap='Greens', ax=None, rdm=None, hue=None, palette=None, markers=None):
     df_plot = df_performance[(df_performance['Metric']==metric)
                             & (~df_performance['Group'].isin(['full_data', 'Average', 'WeightedAverage']))]
     
@@ -30,11 +30,26 @@ def plot_barplot(df_performance, metric, n_top=5, sort_by='Average', cmap='Green
                       capsize=0.5,
                       ax=ax)
                       
-    plot = sb.stripplot(data=df_plot, y='Value', x='Method', 
-                      order=top_methods if n_top is not None else None,
-                      color='gray',
-                      size=2,
-                      ax=ax)
+    if markers is None:
+        plot = sb.stripplot(data=df_plot, y='Value', x='Method', hue=hue,
+                          order=top_methods if n_top is not None else None,
+                          palette=palette,
+                          color='gray' if hue is None else None,
+                          size=2,
+                          ax=ax)
+    else:
+        hue_cats = {marker: [k for k, v in markers.items() if v==marker] for marker in set(markers.values())}
+        for marker, cats in hue_cats.items():
+            plot = sb.stripplot(data=df_plot[df_plot[hue].isin(cats)], y='Value', x='Method', hue=hue,
+                              order=top_methods if n_top is not None else None,
+                              palette=palette,
+                              marker=marker,
+                              color='gray' if hue is None else None,
+                              jitter=0.3,
+                              #dodge=True,
+                              s=2,
+                              ax=ax)
+
 
     xlabels = plot.get_xticklabels()
     xlabels = [mapper_methods[el.get_text().split('_')[0]] for el in xlabels]
@@ -44,13 +59,14 @@ def plot_barplot(df_performance, metric, n_top=5, sort_by='Average', cmap='Green
     plot.grid(False)
     plot.set_ylabel(metric, labelpad=2)
     plot.set_xlabel(None)
-    plot.tick_params(axis='both', pad=0)
+    plot.tick_params(axis='both', pad=1, color=plot.spines["bottom"].get_edgecolor(),
+                     length=3, width=1, left=True, bottom=True)
     
     plot.spines['left'].set_linewidth(LINEWIDTH)
     plot.spines['bottom'].set_linewidth(LINEWIDTH) 
 
     if rdm is not None:
-        ax.axhline(y=rdm, color='gray', linestyle='--')
+        ax.axhline(y=rdm, color='black', linestyle='--')
 
 
 def plot_boxplot(df_performance, metric, n_top=5, sort_by='Average', cmap='Greens', ax=None, rdm=None):
@@ -84,10 +100,11 @@ def plot_boxplot(df_performance, metric, n_top=5, sort_by='Average', cmap='Green
     plot.grid(False)
     plot.set_ylabel(metric, labelpad=2)
     plot.set_xlabel(None)
-    plot.tick_params(axis='both', pad=0)
+    plot.tick_params(axis='both', pad=1, color=plot.spines["bottom"].get_edgecolor(),
+                     length=3, width=1, left=True, bottom=True)
     
     plot.spines['left'].set_linewidth(LINEWIDTH)
     plot.spines['bottom'].set_linewidth(LINEWIDTH)
 
     if rdm is not None:
-        ax.axhline(y=rdm, color='gray', linestyle='--')
+        ax.axhline(y=rdm, color='black', linestyle='--')

@@ -17,6 +17,10 @@ mapper_methods = {
     'tulip-tcr': 'TULIP-TCR',
     'itcep': 'iTCep',
     'nettcr': 'NetTCR-2.2',
+    'nettcrcat': 'NetTCR-Cat',
+    'tcrgp': 'TCRGP',
+    'mixtcrpred': 'MixTCRpred',
+    'nettcrcat': 'NetTCR-Cat'
 }
 
 
