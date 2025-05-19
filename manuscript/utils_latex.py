@@ -6,6 +6,7 @@ from utils_config import mapper_methods
 
 
 def to_print_df(df_performance, metrics, n_top=3, grouping='Epitope'):
+    cat_models = ['MixTCRpred', 'NetTCR-Cat', 'TCRGP']
     df_tmp = df_performance[df_performance['Metric'].isin(metrics)]
     df_tmp = df_tmp[~df_tmp['Group'].isin(['WeightedAverage', 'Average', 'full_data'])]
     df_mean = df_tmp.groupby(['BaseModel', 'Metric'])['Value'].mean().unstack()[metrics]
@@ -33,10 +34,14 @@ def to_print_df(df_performance, metrics, n_top=3, grouping='Epitope'):
             df_tmp[col] = '-'
     df_tmp = df_tmp[metrics]
     def format_mean(mean, n_top=3):
-        best_vals = mean.nlargest(n=n_top).index
+        cat_models_lower = ['mixtcrpred', 'nettcrcat', 'tcrgp']
+        mean_ = mean[~mean.index.isin(cat_models_lower)]
+        best_vals = mean_.nlargest(n=n_top).index
         if mean.name == 'Rank':
-            best_vals = mean.nsmallest(n=n_top).index
+            best_vals = mean_.nsmallest(n=n_top).index
         vals_print = [f'{m:.2f}' for m in mean]
+        vals_print = [el + '*' if idx in cat_models_lower else el
+                      for idx, el in zip(mean.index, vals_print)]
         vals_print = [f'\\textbf{{{el}}}' if idx in best_vals else el
                      for idx, el in zip(mean.index, vals_print)]
         return vals_print
@@ -48,6 +53,9 @@ def to_print_df(df_performance, metrics, n_top=3, grouping='Epitope'):
     df_tmp = pd.concat([df_tmp, df_combined], axis=1)
     df_tmp.index = df_tmp.index.map(mapper_methods)
     df_tmp = df_tmp.fillna("-")
+    
+    df_tmp.index = ['\\textbf{' + el + '}' if el in cat_models else el for el in df_tmp.index]
+    
     return df_tmp
 
 
