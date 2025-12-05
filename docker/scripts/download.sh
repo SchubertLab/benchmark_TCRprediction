@@ -76,7 +76,7 @@ wget https://files.aiforoncology.nl/stapler/model/pretrained_model/pre-cdr3_comb
 cd /external
 git clone https://github.com/theislab/tcellmatch.git
 cd tcellmatch
-wget -O models.zip https://figshare.com/ndownloader/files/43082557
+wget --user-agent="Mozilla/5.0" -O models.zip https://figshare.com/ndownloader/files/43082557
 unzip models.zip
 mv msb199416-sup-0005-DatasetEV4 models
 
