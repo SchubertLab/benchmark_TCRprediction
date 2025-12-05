@@ -114,6 +114,8 @@ nettcr:
         repository: /external/NetTCR-2.2
         conda: epytope_torch21
         options:
+                model_type:
+                        PAN: pan
                 model:
                         t.0.v.1: t.0.v.1
                         t.0.v.2: t.0.v.2
